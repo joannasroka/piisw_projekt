@@ -21,7 +21,7 @@ public class ShortTermTicket extends Ticket {
     @Column(name = "minutes", nullable = false)
     private int minutes;
 
-    @Column(name = "minutes", nullable = false)
+    @Column(name = "hours", nullable = false)
     private int hours;
 
     @Override
