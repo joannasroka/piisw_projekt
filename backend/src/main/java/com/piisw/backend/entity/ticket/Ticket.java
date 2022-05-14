@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "users")
-@DiscriminatorColumn(name = "type", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "tickets")
+@DiscriminatorColumn(name = "ticket_type", discriminatorType = DiscriminatorType.STRING)
 @Inheritance(strategy = InheritanceType.JOINED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -16,13 +16,13 @@ import java.math.BigDecimal;
 @Setter
 public abstract class Ticket extends BaseEntity {
     @Column(name = "normal_price", nullable = false)
-    BigDecimal normalPrice;
+    private BigDecimal normalPrice;
 
     @Column(name = "reduced_price", nullable = false)
-    BigDecimal reducedPrice;
+    private BigDecimal reducedPrice;
 
-    @Column(name = "description", length = 300)
-    String description;
+    @Column(name = "name", length = 300, unique = true)
+    private String name;
 
-    public abstract TicketType getType();
+    public abstract TicketType getTicketType();
 }
