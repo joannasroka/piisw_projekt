@@ -3,10 +3,10 @@ package com.piisw.backend.controller.authentication;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VALUE;
@@ -18,7 +18,8 @@ public class AuthController {
 
     @PostMapping(value = "/login", consumes = APPLICATION_FORM_URLENCODED_VALUE)
     @Operation(description = "Login")
-    private void login(@Parameter(name = "username", required = true) @RequestParam String username, @Parameter(name = "password", required = true) @RequestParam String password) {
+    private void login(@Parameter(name = "username", required = true) @RequestBody String username,
+                       @Parameter(name = "password", required = true) @RequestBody String password) {
         throw new IllegalStateException("Add Spring Security to handle authentication");
     }
 
