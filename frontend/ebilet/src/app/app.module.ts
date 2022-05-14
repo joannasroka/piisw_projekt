@@ -12,6 +12,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { MatRippleModule } from "@angular/material/core";
+import { AuthenticationModule } from "./authentication/authentication.module";
+import { SharedModule } from "./shared/shared.module";
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,6 +22,8 @@ import { MatRippleModule } from "@angular/material/core";
     LandingPageComponent
   ],
   imports: [
+    AuthenticationModule,
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -29,6 +34,7 @@ import { MatRippleModule } from "@angular/material/core";
     MatIconModule,
     MatListModule,
     MatRippleModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { map, shareReplay } from "rxjs/operators";
 import { UserAuth } from "./authentication/models/userAuth";
+import { AuthenticationService } from './authentication/services/authentication-service/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { UserAuth } from "./authentication/models/userAuth";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  readonly userAuth: UserAuth | undefined;
+  userAuth: UserAuth | undefined;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -18,5 +19,9 @@ export class AppComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver,
+              private authenticationService: AuthenticationService) {
+    this.authenticationService.userAuthObservable.subscribe(x => this.userAuth = x);
+    this.authenticationService.readStoredUserAuth();
+  }
 }

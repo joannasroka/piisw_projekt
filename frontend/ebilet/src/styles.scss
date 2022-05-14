@@ -7,6 +7,43 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   flex: 1 1 auto;
 }
 
+.formCardContainer {
+  padding: 2em;
+  display: flex;
+  justify-content: center;
+
+  mat-card-content {
+    margin-top: 1em;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
+
+.formActionButtons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1em;
+}
+
+.toolbarTitle {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .toolbarButtons button {
   margin-left: 1em;
+}
+
+//snackbars themes
+.snackbar-success {
+  background-color: #9ccc65;
+  color: black;
+}
+
+.snackbar-error {
+  background-color: #bf5555;
+  color: white;
 }
