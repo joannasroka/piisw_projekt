@@ -19,8 +19,11 @@ repositories {
 }
 
 ext {
-	mariaDbVersion = "2.7.3"
-	springdocOpenApiVersion = "1.5.10"
+	mariaDbVersion = "3.0.4"
+	modelMapperVersion = "3.1.0"
+	passayVersion = "1.6.1"
+	springdocOpenApiVersion = "1.6.8"
+	springStarterMailVersion = "2.6.7"
 }
 
 dependencies {
@@ -32,8 +35,10 @@ dependencies {
 	implementation "org.springdoc:springdoc-openapi-ui:$springdocOpenApiVersion"
 	implementation "org.springdoc:springdoc-openapi-data-rest:$springdocOpenApiVersion"
 	implementation "org.springdoc:springdoc-openapi-security:$springdocOpenApiVersion"
-	implementation "org.springframework.boot:spring-boot-starter-mail"
+	implementation "org.springframework.boot:spring-boot-starter-mail:$springStarterMailVersion"
 	implementation 'org.springframework.retry:spring-retry'
+	implementation "org.passay:passay:$passayVersion"
+	implementation "org.modelmapper:modelmapper:$modelMapperVersion"
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
