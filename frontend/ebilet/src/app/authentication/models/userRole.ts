@@ -1,0 +1,4 @@
+export enum UserRole {
+  PASSENGER = "ROLE_PASSENGER",
+  INSPECTOR = "ROLE_INSPECTOR"
+}

@@ -1,0 +1,12 @@
+<div class="firstSection">
+  <div class="centerContent">
+    <div class="mainTitle">
+      <p class="title">CityTicket</p>
+      <p class="subtitle">Szybko i łatwo kupuj bilety komunikacji miejskiej</p>
+    </div>
+    <div class="mainButtons">
+      <button *ngIf="!isLoggedIn" mat-flat-button routerLink="/login">Załóż konto!</button>
+      <button *ngIf="isLoggedIn" mat-flat-button routerLink="/myBoards">Przejdź kupowania biletów</button>
+    </div>
+  </div>
+</div>
