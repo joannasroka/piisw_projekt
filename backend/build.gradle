@@ -19,6 +19,7 @@ repositories {
 }
 
 ext {
+	javaFakerVersion = "1.0.2"
 	mariaDbVersion = "3.0.4"
 	modelMapperVersion = "3.1.0"
 	passayVersion = "1.6.1"
@@ -39,6 +40,7 @@ dependencies {
 	implementation 'org.springframework.retry:spring-retry'
 	implementation "org.passay:passay:$passayVersion"
 	implementation "org.modelmapper:modelmapper:$modelMapperVersion"
+	implementation "com.github.javafaker:javafaker:$javaFakerVersion"
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
