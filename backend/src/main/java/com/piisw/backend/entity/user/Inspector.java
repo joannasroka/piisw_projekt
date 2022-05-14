@@ -20,6 +20,10 @@ public class Inspector extends User {
         super(REGISTERED);
     }
 
+    public Inspector(String email, String firstName, String lastName) {
+        super(email, null, firstName, lastName, REGISTERED);
+    }
+
     @Override
     public UserRole getRole() {
         return UserRole.INSPECTOR;

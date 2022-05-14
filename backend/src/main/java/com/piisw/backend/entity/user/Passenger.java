@@ -20,6 +20,10 @@ public class Passenger extends User {
         super(REGISTERED);
     }
 
+    public Passenger(String email, String firstName, String lastName) {
+        super(email, null, firstName, lastName, REGISTERED);
+    }
+
     @Override
     public UserRole getRole() {
         return UserRole.PASSENGER;
