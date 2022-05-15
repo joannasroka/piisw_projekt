@@ -20,7 +20,9 @@ repositories {
 
 ext {
 	javaFakerVersion = "1.0.2"
+	jUnitVersion = "5.8.2"
 	mariaDbVersion = "3.0.4"
+	mockitoInlineVersion = "4.5.1"
 	modelMapperVersion = "3.1.0"
 	passayVersion = "1.6.1"
 	springdocOpenApiVersion = "1.6.8"
@@ -45,6 +47,10 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
+	testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnitVersion"
+	testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
+	testImplementation 'com.h2database:h2'
 }
 
 tasks.named('test') {
