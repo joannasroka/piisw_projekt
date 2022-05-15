@@ -3,6 +3,7 @@ import { Observable } from "rxjs";
 import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { map, shareReplay } from "rxjs/operators";
 import { UserAuth } from "./authentication/models/userAuth";
+import { UserRole } from "./authentication/models/userRole";
 import { AuthenticationService } from './authentication/services/authentication-service/authentication.service';
 import { Router } from "@angular/router";
 import { SnackbarService } from "./shared/snackbar/snackbar-service/snackbar.service";
@@ -14,6 +15,7 @@ import { SnackbarService } from "./shared/snackbar/snackbar-service/snackbar.ser
 })
 export class AppComponent {
   userAuth: UserAuth | undefined;
+  readonly UserRole = UserRole;
   loading = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -30,6 +32,14 @@ export class AppComponent {
     this.authenticationService.readStoredUserAuth();
   }
 
+  get isUserRolePassenger(): boolean {
+    return this.userAuth ? this.userAuth.role === UserRole.PASSENGER : false;
+  }
+
+  get isUserRoleInspector(): boolean {
+    return this.userAuth ? this.userAuth.role === UserRole.INSPECTOR : false;
+  }
+
   logout(): void {
     this.loading = true;
     this.authenticationService.logout()
@@ -40,7 +50,7 @@ export class AppComponent {
         },
         error: () => {
           this.loading = false;
-          this.snackbarService.openErrorSnackbar('Logout error!');
+          this.router.navigate(['/']).then(() => this.snackbarService.openErrorSnackbar('Logout error'));
         }
       });
   }
