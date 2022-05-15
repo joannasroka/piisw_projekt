@@ -6,7 +6,9 @@ import com.piisw.backend.entity.ticket.LongTermTicket;
 import com.piisw.backend.entity.ticket.ShortTermTicket;
 import com.piisw.backend.entity.ticket.SingleTicket;
 import com.piisw.backend.entity.ticket.Ticket;
+import com.piisw.backend.entity.user.Inspector;
 import com.piisw.backend.entity.user.Passenger;
+import com.piisw.backend.repository.InspectorRepository;
 import com.piisw.backend.repository.PassengerRepository;
 import com.piisw.backend.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
@@ -36,11 +38,14 @@ public class DataInitializer implements CommandLineRunner {
     private static final int ACTIVE_PASSENGER_AMOUNT = 9;
     private static final int REGISTERED_PASSENGER_AMOUNT = 3;
 
+    private static final int INSPECTOR_AMOUNT = 3;
+
     private static final int SINGLE_TICKETS_AMOUNT = 1;
     private static final int SHORT_TERM_TICKETS_AMOUNT = 3;
     private static final int LONG_TERM_TICKETS_AMOUNT = 5;
 
     private final PassengerRepository passengerRepository;
+    private final InspectorRepository inspectorRepository;
     private final TicketRepository ticketRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -55,6 +60,7 @@ public class DataInitializer implements CommandLineRunner {
 
     private void initializeData() {
         initializePassengers();
+        initializeInspectors();
         initializeTickets();
         log.info("Data initialized.");
     }
@@ -91,6 +97,34 @@ public class DataInitializer implements CommandLineRunner {
         passenger.setAccountStatus(accountStatus);
 
         return passenger;
+    }
+
+    private void initializeInspectors() {
+        List<Inspector> inspectors = new ArrayList<>();
+
+        IntStream.range(0, INSPECTOR_AMOUNT).forEach(i -> inspectors.add(createInspector(i)));
+
+        inspectorRepository.saveAll(Stream.of(inspectors).flatMap(Collection::stream).collect(Collectors.toList()));
+    }
+
+    private Inspector createInspector(int number) {
+        String password = passwordEncoder.encode(PASSWORD);
+
+        String firstName = faker.name().firstName();
+        String lastName = faker.name().lastName();
+
+        if (number == 0) {
+            firstName = "Maria";
+            lastName = "Smith";
+        }
+
+        String mail = firstName.toLowerCase(Locale.ROOT) + "." + lastName.toLowerCase(Locale.ROOT) + "@mail.com";
+
+        Inspector inspector = new Inspector(mail, firstName, lastName);
+        inspector.setPassword(password);
+        inspector.setAccountStatus(ACTIVE);
+
+        return inspector;
     }
 
     private void initializeTickets() {
