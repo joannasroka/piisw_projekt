@@ -19,6 +19,10 @@ export class AuthenticationService {
     this.userAuthObservable = this.userAuthSubject.asObservable();
   }
 
+  public userAuthValue(): UserAuth {
+    return this.userAuthSubject.value;
+  }
+
   readStoredUserAuth(): void {
     const savedUserAuth = sessionStorage.getItem('userAuth')
     if (savedUserAuth) {

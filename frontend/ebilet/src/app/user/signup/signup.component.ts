@@ -21,7 +21,7 @@ import { checkEmailMismatch, CrossFieldErrorMatcher } from "../../helpers/formCo
 })
 export class SignupComponent implements OnInit, AfterContentChecked {
   signupForm: FormGroup;
-  passengerSingupRequest: PassengerSingupRequest | undefined;
+  passengerSignupRequest: PassengerSingupRequest | undefined;
   errorMatcher = new CrossFieldErrorMatcher("emailMismatch");
   loading = false;
 
@@ -61,22 +61,21 @@ export class SignupComponent implements OnInit, AfterContentChecked {
 
     this.loading = true;
 
-    this.passengerSingupRequest = {
+    this.passengerSignupRequest = {
       email: this.f['email'].value,
       firstName: this.f['firstName'].value,
       lastName: this.f['lastName'].value,
     };
 
-    this.passengerService.signup(this.passengerSingupRequest)
+    this.passengerService.signup(this.passengerSignupRequest)
       .subscribe({
         next: () => {
           this.loading = false;
-          this.dialogService.openInfoDialog('Signup completed successfully',
-            'You now have to <b>verify</b> your e-mail address and set up your password, by clicking an <b>activation link</b> in an activation e-mail.', true);
+          this.dialogService.openInfoDialog('Almost there!',
+            'You now have to <b>verify</b> your e-mail address and set up your password, by clicking an <b>activation link</b> in an activation e-mail.<br>Activation link will be valid for <b>10 minutes</b>.', true);
         },
         error: err => {
           const backendError : BackendError = err.error
-          console.log(backendError)
           if (backendError.globalException.message === 'error.failedValidation' && backendError.validationErrors[0].message == "error.emailExists") {
             this.snackbarService.openErrorSnackbar('Account with provided email address already exists');
             this.f['email'].setErrors({ emailAlreadyUsed: true });

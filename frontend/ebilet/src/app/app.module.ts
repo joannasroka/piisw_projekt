@@ -17,6 +17,7 @@ import { SharedModule } from "./shared/shared.module";
 import { HttpClientModule } from "@angular/common/http";
 import { MatMenuModule } from "@angular/material/menu";
 import { UserModule } from './user/user.module';
+import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { UserModule } from './user/user.module';
         MatRippleModule,
         HttpClientModule,
         MatMenuModule,
-        UserModule
+        UserModule,
+        MatPasswordStrengthModule.forRoot()
     ],
   providers: [],
   bootstrap: [AppComponent]
