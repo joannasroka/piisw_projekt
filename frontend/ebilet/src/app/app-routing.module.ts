@@ -5,13 +5,17 @@ import { LoginComponent } from "./authentication/login/login.component";
 import { SignupComponent } from './user/signup/signup.component';
 import { ConfirmSignupComponent } from "./user/confirm-signup/confirm-signup.component";
 import { TokenGuard } from "./helpers/guards/token.guard";
+import { BrowseTicketsComponent } from './tickets/browse-tickets/browse-tickets.component';
+import { NotAuthGuard } from "./helpers/guards/not-auth.guard";
+import { AuthGuard } from "./helpers/guards/auth.guard";
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent},
+  { path: '', component: LandingPageComponent, canActivate: [NotAuthGuard]},
   { path: 'landingPage', component: LandingPageComponent},
-  { path: 'login', component: LoginComponent},
-  { path: 'signup', component: SignupComponent},
-  { path: 'confirmSignup', component: ConfirmSignupComponent, canActivate: [TokenGuard]},
+  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard]},
+  { path: 'signup', component: SignupComponent, canActivate: [NotAuthGuard]},
+  { path: 'confirmSignup', component: ConfirmSignupComponent, canActivate: [TokenGuard, NotAuthGuard]},
+  { path: 'browseTickets', component: BrowseTicketsComponent, canActivate: [AuthGuard]},
   // otherwise redirect to landing page
   { path: '**', redirectTo: 'landingPage'}
 ];

@@ -10,6 +10,10 @@
   background: inherit;
 }
 
+.active-list-item {
+  background: rgba(0,0,0,0.13) !important;
+}
+
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
