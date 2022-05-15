@@ -48,7 +48,7 @@ jobs:
       - run: cd ./backend && ./gradlew test
 
   frontend:
-    working_directory: ~/repo/frontend/ebilet
+    working_directory: ~/ng-project
     docker:
       - image: cimg/node:16.13.1-browsers
     steps:
@@ -61,13 +61,13 @@ jobs:
           name: Check install
       - checkout
       - restore_cache:
-          key: ng-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: ng-project-{{ .Branch }}-{{ checksum "./frontend/ebilet/package-lock.json" }}
       - run: npm install
       - save_cache:
-          key: ng-project-{{ .Branch }}-{{ checksum "package-lock.json" }}
+          key: ng-project-{{ .Branch }}-{{ checksum "./frontend/ebilet/package-lock.json" }}
           paths:
             - "node_modules"
-      - run: npm run test
+      - run: cd ./frontend/ebilet && npm run test
       
 workflows:
   backend_and_frontend:
