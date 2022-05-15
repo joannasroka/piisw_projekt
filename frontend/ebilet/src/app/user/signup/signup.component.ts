@@ -22,7 +22,7 @@ import { checkEmailMismatch, CrossFieldErrorMatcher } from "../../helpers/formCo
 export class SignupComponent implements OnInit, AfterContentChecked {
   signupForm: FormGroup;
   passengerSingupRequest: PassengerSingupRequest | undefined;
-  errorMatcher = new CrossFieldErrorMatcher();
+  errorMatcher = new CrossFieldErrorMatcher("emailMismatch");
   loading = false;
 
   constructor(

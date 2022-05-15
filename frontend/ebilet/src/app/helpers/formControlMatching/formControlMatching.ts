@@ -2,8 +2,19 @@ import { ErrorStateMatcher } from "@angular/material/core";
 import { FormControl, FormGroup, FormGroupDirective, NgForm, ValidationErrors } from "@angular/forms";
 
 export class CrossFieldErrorMatcher implements ErrorStateMatcher {
+  expectedError: string;
+
+  constructor(expectedError: string) {
+    this.expectedError = expectedError;
+  }
+
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    return !!(control && form && control.dirty && form.invalid);
+    return !!(
+      control
+      && control.parent
+      && control.parent.invalid
+      && control.parent.dirty
+      && control.parent.hasError(this.expectedError));
   }
 }
 
