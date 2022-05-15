@@ -35,7 +35,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: chmod +x ./backend/gradlew && ./backend/gradlew dependencies
+      - run: cd ./backend && chmod +x gradlew && ./gradlew dependencies
 
       - save_cache:
           paths:
@@ -43,4 +43,4 @@ jobs:
           key: v1-dependencies-{{ checksum "./backend/build.gradle" }}
 
       # run tests!
-      - run: ./backend/gradlew test
+      - run: cd ./backend && ./gradlew test
