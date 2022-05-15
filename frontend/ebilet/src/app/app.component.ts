@@ -14,6 +14,7 @@ import { SnackbarService } from "./shared/snackbar/snackbar-service/snackbar.ser
 })
 export class AppComponent {
   userAuth: UserAuth | undefined;
+  loading = false;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -30,12 +31,15 @@ export class AppComponent {
   }
 
   logout(): void {
+    this.loading = true;
     this.authenticationService.logout()
       .subscribe({
         next: () => {
+          this.loading = false;
           this.router.navigate(['/']).then(() => this.snackbarService.openSuccessSnackbar('Logged out'));
         },
         error: () => {
+          this.loading = false;
           this.snackbarService.openErrorSnackbar('Logout error!');
         }
       });

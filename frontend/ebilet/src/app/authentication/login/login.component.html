@@ -9,7 +9,7 @@
             <mat-label>E-mail</mat-label>
             <input matInput required formControlName="email" trim="blur">
             <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
-              Enter your e-mail
+              Enter your e-mail address
             </mat-error>
             <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
               Enter correct e-mail address
@@ -28,9 +28,6 @@
         <div class="formActionButtons">
           <button type="submit" mat-raised-button color="primary">
             Log in
-          </button>
-          <button type="button" mat-raised-button routerLink="/signup" style="margin-left: 1em">
-            Sign up
           </button>
         </div>
       </form>

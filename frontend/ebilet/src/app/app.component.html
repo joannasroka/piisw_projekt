@@ -1,3 +1,4 @@
+<app-loading-spinner [show]="loading"></app-loading-spinner>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #drawer class="sidenav" fixedInViewport
                [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
@@ -32,7 +33,7 @@
         <button
           mat-flat-button
           routerLink="/signup"
-          *ngIf="!userAuth && ((isHandset$ | async) === false)">
+          *ngIf="!userAuth">
           Sign up
         </button>
         <button

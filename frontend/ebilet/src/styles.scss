@@ -27,6 +27,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-top: 1em;
 }
 
+.small-mobilePadding {
+  padding: 1em !important;
+}
+
 .toolbarTitle {
   white-space: nowrap;
   overflow: hidden;

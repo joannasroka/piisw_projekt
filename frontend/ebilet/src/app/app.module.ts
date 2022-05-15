@@ -16,6 +16,7 @@ import { AuthenticationModule } from "./authentication/authentication.module";
 import { SharedModule } from "./shared/shared.module";
 import { HttpClientModule } from "@angular/common/http";
 import { MatMenuModule } from "@angular/material/menu";
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { MatMenuModule } from "@angular/material/menu";
         MatListModule,
         MatRippleModule,
         HttpClientModule,
-        MatMenuModule
+        MatMenuModule,
+        UserModule
     ],
   providers: [],
   bootstrap: [AppComponent]
