@@ -72,7 +72,7 @@ export class SignupComponent implements OnInit, AfterContentChecked {
         next: () => {
           this.loading = false;
           this.dialogService.openInfoDialog('Almost there!',
-            'You now have to <b>verify</b> your e-mail address and set up your password, by clicking an <b>activation link</b> in an activation e-mail.<br>Activation link will be valid for <b>10 minutes</b>.', true);
+            'You now have to <b>verify</b> your e-mail address and set up your password, by clicking an <b>activation link</b> in an activation e-mail.<br>Activation link will be valid for <b>10 minutes</b>.', true, "/login");
         },
         error: err => {
           const backendError : BackendError = err.error

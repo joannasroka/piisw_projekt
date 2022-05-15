@@ -3,9 +3,24 @@
 </mat-toolbar>
 <div class="panelContainer" ngClass.xs="small-mobilePadding">
   <div fxFlex.xs="100%" fxFlex.sm="87.5%" fxFlex.md="75%" fxFlex.lg="62.5%" fxFlex.xl="50%">
-    <mat-button-toggle-group name="ticketPricingType">
-      <mat-button-toggle value="regular">Regular</mat-button-toggle>
-      <mat-button-toggle value="reduced">Reduced-price</mat-button-toggle>
+    <mat-button-toggle-group [(ngModel)]="ticketPricingType">
+      <mat-button-toggle [value]="TicketPricingType.REGULAR">Regular</mat-button-toggle>
+      <mat-button-toggle [value]="TicketPricingType.REDUCED">Reduced-price</mat-button-toggle>
     </mat-button-toggle-group>
+    <div class="mat-h2">Single tickets</div>
+    <mat-list *ngFor="let ticket of getSingeTickets(); last as isLast">
+      <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType"></app-ticket-row>
+    </mat-list>
+    <div class="categorySpacer"></div>
+    <div class="mat-h2">Shor-term tickets</div>
+    <mat-list *ngFor="let ticket of getShortTermTickets(); last as isLast">
+      <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType"></app-ticket-row>
+    </mat-list>
+    <div class="categorySpacer"></div>
+    <div class="mat-h2">Long-term tickets</div>
+    <mat-list *ngFor="let ticket of getLongTermTickets(); last as isLast">
+      <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType"></app-ticket-row>
+    </mat-list>
+
   </div>
 </div>
