@@ -4,6 +4,8 @@ import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
 import { map, shareReplay } from "rxjs/operators";
 import { UserAuth } from "./authentication/models/userAuth";
 import { AuthenticationService } from './authentication/services/authentication-service/authentication.service';
+import { Router } from "@angular/router";
+import { SnackbarService } from "./shared/snackbar/snackbar-service/snackbar.service";
 
 @Component({
   selector: 'app-root',
@@ -20,8 +22,22 @@ export class AppComponent {
     );
 
   constructor(private breakpointObserver: BreakpointObserver,
+              private router: Router,
+              private snackbarService: SnackbarService,
               private authenticationService: AuthenticationService) {
     this.authenticationService.userAuthObservable.subscribe(x => this.userAuth = x);
     this.authenticationService.readStoredUserAuth();
+  }
+
+  logout(): void {
+    this.authenticationService.logout()
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']).then(() => this.snackbarService.openSuccessSnackbar('Logged out'));
+        },
+        error: () => {
+          this.snackbarService.openErrorSnackbar('Logout error!');
+        }
+      });
   }
 }

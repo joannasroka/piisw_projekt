@@ -15,27 +15,29 @@ import { MatRippleModule } from "@angular/material/core";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { SharedModule } from "./shared/shared.module";
 import { HttpClientModule } from "@angular/common/http";
+import { MatMenuModule } from "@angular/material/menu";
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent
   ],
-  imports: [
-    AuthenticationModule,
-    SharedModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatRippleModule,
-    HttpClientModule
-  ],
+    imports: [
+        AuthenticationModule,
+        SharedModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        LayoutModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatSidenavModule,
+        MatIconModule,
+        MatListModule,
+        MatRippleModule,
+        HttpClientModule,
+        MatMenuModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -35,6 +35,22 @@
           *ngIf="!userAuth && ((isHandset$ | async) === false)">
           Sign up
         </button>
+        <button
+          mat-button
+          [matMenuTriggerFor]="userMenu"
+          *ngIf="userAuth">
+          <span *ngIf="(isHandset$ | async) === false">
+            {{userAuth.firstName}} {{userAuth.lastName}}
+          </span>
+          <mat-icon *ngIf="(isHandset$ | async)">person</mat-icon>
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <mat-menu #userMenu="matMenu" xPosition="before">
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>logout</mat-icon>
+            Log out
+          </button>
+        </mat-menu>
       </div>
     </mat-toolbar>
     <router-outlet></router-outlet>

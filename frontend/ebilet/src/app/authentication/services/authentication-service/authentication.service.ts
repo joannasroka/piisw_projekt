@@ -9,8 +9,8 @@ import { environment } from "../../../../environments/environment";
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private userAuthSubject: BehaviorSubject<UserAuth>;
-  public userAuthObservable: Observable<UserAuth>;
+  private userAuthSubject: BehaviorSubject<UserAuth | any>;
+  public userAuthObservable: Observable<UserAuth | any>;
 
   constructor(
     private http: HttpClient,
@@ -34,10 +34,15 @@ export class AuthenticationService {
             .pipe(map(user => {
               this.userAuthSubject.next(user);
               sessionStorage.setItem('userAuth', JSON.stringify(user))
-              console.log(user);
               return user;
             }));
         })
       );
+  }
+
+  logout(): Observable<any> {
+    sessionStorage.clear();
+    this.userAuthSubject.next(null);
+    return this.http.post<any>(`${environment.apiUrl}/logout`, {},{withCredentials: true})
   }
 }

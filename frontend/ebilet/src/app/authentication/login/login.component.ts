@@ -48,11 +48,11 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: () => {
-          this.router.navigate([this.returnUrl]).then(() => this.snackbarService.openSuccessSnackbar('Zalogowano pomyślnie'));
+          this.router.navigate([this.returnUrl]).then(() => this.snackbarService.openSuccessSnackbar('Logged in successfully'));
         },
         error: () => {
           this.loginForm.reset();
-          this.snackbarService.openErrorSnackbar('Błąd logowania!');
+          this.snackbarService.openErrorSnackbar('Login error!');
           this.loading = false;
         }
       });
