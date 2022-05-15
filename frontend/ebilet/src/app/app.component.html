@@ -27,13 +27,13 @@
           mat-flat-button
           routerLink="/login"
           *ngIf="!userAuth">
-          Zaloguj się
+          Log in
         </button>
         <button
           mat-flat-button
           routerLink="/signup"
           *ngIf="!userAuth && ((isHandset$ | async) === false)">
-          Zarejestruj się
+          Sign up
         </button>
       </div>
     </mat-toolbar>
