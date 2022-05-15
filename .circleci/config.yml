@@ -68,3 +68,9 @@ jobs:
           paths:
             - "node_modules"
       - run: npm run test
+      
+workflows:
+  backend_and_frontend:
+    jobs:
+      - backend
+      - frontend
