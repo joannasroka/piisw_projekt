@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatListModule } from '@angular/material/list';
 
 import { TicketRowComponent } from './ticket-row.component';
+import { MatIconModule } from "@angular/material/icon";
 
 describe('TicketRowComponent', () => {
   let component: TicketRowComponent;
@@ -8,6 +10,10 @@ describe('TicketRowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        MatListModule,
+        MatIconModule
+      ],
       declarations: [ TicketRowComponent ]
     })
     .compileComponents();

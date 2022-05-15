@@ -20,15 +20,15 @@ export class BrowseTicketsComponent implements OnInit {
   }
 
   getSingeTickets(): TicketResponse[] {
-    return this.tickets.filter(t => t.ticketType == TicketType.SINGLE)
+    return this.tickets?.filter(t => t.ticketType == TicketType.SINGLE)
   }
 
   getShortTermTickets(): TicketResponse[] {
-    return this.tickets.filter(t => t.ticketType == TicketType.SHORT_TERM)
+    return this.tickets?.filter(t => t.ticketType == TicketType.SHORT_TERM)
   }
 
   getLongTermTickets(): TicketResponse[] {
-    return this.tickets.filter(t => t.ticketType == TicketType.LONG_TERM)
+    return this.tickets?.filter(t => t.ticketType == TicketType.LONG_TERM)
   }
 
   ngOnInit(): void {
