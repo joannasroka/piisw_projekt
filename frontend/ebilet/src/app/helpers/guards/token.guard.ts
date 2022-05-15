@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { SnackbarService } from '../../shared/snackbar/snackbar-service/snackbar.service';
 import { VerificationTokenService } from "../../user/services/verification-token-service/verification-token.service";

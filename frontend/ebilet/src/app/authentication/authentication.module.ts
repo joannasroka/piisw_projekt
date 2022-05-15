@@ -12,7 +12,6 @@ import { RouterModule } from "@angular/router";
 import { NgxTrimDirectiveModule } from "ngx-trim-directive";
 
 
-
 @NgModule({
   declarations: [
     LoginComponent

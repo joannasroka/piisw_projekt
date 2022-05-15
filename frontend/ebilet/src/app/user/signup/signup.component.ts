@@ -1,10 +1,5 @@
 import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from "@angular/forms";
+import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { PassengerSingupRequest } from "../models/request/passengerSingupRequest";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SnackbarService } from "../../shared/snackbar/snackbar-service/snackbar.service";

@@ -12,7 +12,6 @@ import { NgxTrimDirectiveModule } from "ngx-trim-directive";
 import { ConfirmSignupComponent } from './confirm-signup/confirm-signup.component';
 
 
-
 @NgModule({
   declarations: [
     SignupComponent,
