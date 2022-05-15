@@ -48,7 +48,7 @@ jobs:
       - run: cd ./backend && ./gradlew test
 
   frontend:
-    working_directory: ~/ng-project
+    working_directory: ~/repo/frontend/ebilet
     docker:
       - image: cimg/node:16.13.1-browsers
     steps:
