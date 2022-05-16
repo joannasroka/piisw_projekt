@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserAuth } from "../../models/userAuth";
 import { BehaviorSubject, Observable, switchMap } from "rxjs";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { environment } from "../../../../environments/environment";
 
@@ -31,7 +31,10 @@ export class AuthenticationService {
   }
 
   login(username: string, password: string): Observable<UserAuth> {
-    return this.http.post<any>(`${environment.apiUrl}/login`, {},{params: {username, password}, withCredentials: true})
+    let body = new HttpParams({fromObject: {username, password}});
+    console.log(body.toString());
+    return this.http.post<any>(`${environment.apiUrl}/login`, body.toString(),
+      {headers: {'Content-Type': 'application/x-www-form-urlencoded'}, withCredentials: true})
       .pipe(
         switchMap(() => {
           return this.http.get<UserAuth>(`${environment.apiUrl}/api/users/@me`, {withCredentials: true})
