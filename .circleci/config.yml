@@ -62,7 +62,7 @@ jobs:
       - checkout
       - restore_cache:
           key: ng-project-{{ .Branch }}-{{ checksum "./frontend/ebilet/package-lock.json" }}
-      - run: npm install
+      - run: cd ./frontend/ebilet && npm install
       - save_cache:
           key: ng-project-{{ .Branch }}-{{ checksum "./frontend/ebilet/package-lock.json" }}
           paths:
