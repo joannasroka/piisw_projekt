@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,4 +20,6 @@ public class TicketPurchaseRequest {
     @NotNull(message = "error.cannotBeBlank")
     @Schema(required = true)
     private TicketPrice ticketPrice;
+
+    private LocalDate validityStartDate;
 }

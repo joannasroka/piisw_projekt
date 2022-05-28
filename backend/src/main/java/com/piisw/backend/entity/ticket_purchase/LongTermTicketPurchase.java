@@ -25,8 +25,9 @@ public class LongTermTicketPurchase extends TicketPurchase {
     @Column(name = "validity_start_date_time")
     private LocalDateTime validityStartDateTime;
 
-    public LongTermTicketPurchase(Passenger passenger, Ticket ticket, TicketPrice ticketPrice) {
+    public LongTermTicketPurchase(Passenger passenger, Ticket ticket, TicketPrice ticketPrice, LocalDateTime validityStartDateTime) {
         super(passenger, ticket, ticketPrice, LocalDateTime.now());
+        this.validityStartDateTime = validityStartDateTime;
     }
 
     @Override

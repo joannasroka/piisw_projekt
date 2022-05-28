@@ -24,7 +24,7 @@ public class TicketPurchaseController extends BaseController {
     @PreAuthorize(HAS_ROLE_PASSENGER)
     @PostMapping
     @ResponseStatus(CREATED)
-    public TicketPurchaseResponse createPassenger(@RequestBody @Valid TicketPurchaseRequest ticketPurchaseRequest) {
+    public TicketPurchaseResponse purchaseTicket(@RequestBody @Valid TicketPurchaseRequest ticketPurchaseRequest) {
         Long currentPassengerId = authenticationContextService.getCurrentUserId();
         return ticketPurchaseService.purchaseTicket(ticketPurchaseRequest, currentPassengerId);
     }

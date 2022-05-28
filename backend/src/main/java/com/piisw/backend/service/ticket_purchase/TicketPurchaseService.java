@@ -9,6 +9,8 @@ import com.piisw.backend.entity.ticket_purchase.ShortTermTicketPurchase;
 import com.piisw.backend.entity.ticket_purchase.SingleTicketPurchase;
 import com.piisw.backend.entity.ticket_purchase.TicketPurchase;
 import com.piisw.backend.entity.user.Passenger;
+import com.piisw.backend.exception.InvalidLongTermTicketPurchaseException;
+import com.piisw.backend.exception.ValidityStartDatePassedException;
 import com.piisw.backend.mapper.TicketPurchaseMapper;
 import com.piisw.backend.repository.PassengerRepository;
 import com.piisw.backend.repository.TicketPurchaseRepository;
@@ -16,6 +18,8 @@ import com.piisw.backend.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 
 @Service
 @RequiredArgsConstructor
@@ -37,7 +41,11 @@ public class TicketPurchaseService {
         switch (ticket.getTicketType()) {
             case SINGLE -> ticketPurchase = new SingleTicketPurchase(passenger, ticket, ticketPrice);
             case SHORT_TERM -> ticketPurchase = new ShortTermTicketPurchase(passenger, ticket, ticketPrice);
-            case LONG_TERM -> ticketPurchase = new LongTermTicketPurchase(passenger, ticket, ticketPrice);
+            case LONG_TERM -> {
+                validatePurchaseOfLongTermTicket(ticketPurchaseRequest);
+                ticketPurchase = new LongTermTicketPurchase(passenger, ticket,
+                        ticketPrice, ticketPurchaseRequest.getValidityStartDate().atStartOfDay());
+            }
             default -> throw new IllegalStateException("Unexpected value: " + ticket.getTicketType());
         }
 
@@ -46,5 +54,11 @@ public class TicketPurchaseService {
         return ticketPurchaseMapper.mapToTicketPurchaseResponse(ticketPurchase);
     }
 
+    private void validatePurchaseOfLongTermTicket(TicketPurchaseRequest ticketPurchaseRequest) {
+        if (ticketPurchaseRequest.getValidityStartDate() == null)
+            throw new InvalidLongTermTicketPurchaseException();
+        if (ticketPurchaseRequest.getValidityStartDate().isBefore(LocalDate.now()))
+            throw new ValidityStartDatePassedException();
+    }
 
 }
