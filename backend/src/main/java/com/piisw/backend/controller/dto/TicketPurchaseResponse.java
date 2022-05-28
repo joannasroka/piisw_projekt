@@ -1,35 +1,33 @@
 package com.piisw.backend.controller.dto;
 
-import com.piisw.backend.entity.ticket.TicketType;
+import com.piisw.backend.entity.ticket.TicketPrice;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class TicketResponse {
+public class TicketPurchaseResponse {
     @Schema(required = true)
     private Long id;
 
     @Schema(required = true)
-    private BigDecimal normalPrice;
+    private TicketResponse ticketResponse;
 
     @Schema(required = true)
-    private BigDecimal reducedPrice;
+    private TicketPrice price;
 
     @Schema(required = true)
-    private String name;
+    private LocalDateTime dateOfPurchase;
 
     @Schema(required = true)
-    private TicketType ticketType;
+    private boolean isValid;
 
-    private int days;
+    private LocalDateTime dateTimeOfValidation;
 
-    private int minutes;
-
-    private int hours;
+    private LocalDateTime validityStartDateTime;
 }
