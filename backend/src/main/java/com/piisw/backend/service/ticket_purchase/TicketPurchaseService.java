@@ -26,8 +26,9 @@ public class TicketPurchaseService {
     private final PassengerRepository passengerRepository;
     private final TicketPurchaseMapper ticketPurchaseMapper;
 
-    public TicketPurchaseResponse purchaseTicket(TicketPurchaseRequest ticketPurchaseRequest) {
-        Passenger passenger = passengerRepository.getById(ticketPurchaseRequest.getPassengerId());
+    public TicketPurchaseResponse purchaseTicket(TicketPurchaseRequest ticketPurchaseRequest,
+                                                 Long currentPassengerId) {
+        Passenger passenger = passengerRepository.getById(currentPassengerId);
         Ticket ticket = ticketRepository.getById(ticketPurchaseRequest.getTicketId());
         TicketPrice ticketPrice = ticketPurchaseRequest.getTicketPrice();
 
@@ -44,4 +45,6 @@ public class TicketPurchaseService {
 
         return ticketPurchaseMapper.mapToTicketPurchaseResponse(ticketPurchase);
     }
+
+
 }

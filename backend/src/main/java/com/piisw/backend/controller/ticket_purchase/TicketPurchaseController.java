@@ -3,6 +3,7 @@ package com.piisw.backend.controller.ticket_purchase;
 import com.piisw.backend.controller.BaseController;
 import com.piisw.backend.controller.dto.TicketPurchaseRequest;
 import com.piisw.backend.controller.dto.TicketPurchaseResponse;
+import com.piisw.backend.security.AuthenticationContextService;
 import com.piisw.backend.service.ticket_purchase.TicketPurchaseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,13 +18,14 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/purchase-tickets")
 public class TicketPurchaseController extends BaseController {
-
     private final TicketPurchaseService ticketPurchaseService;
+    private final AuthenticationContextService authenticationContextService;
 
     @PreAuthorize(HAS_ROLE_PASSENGER)
     @PostMapping
     @ResponseStatus(CREATED)
     public TicketPurchaseResponse createPassenger(@RequestBody @Valid TicketPurchaseRequest ticketPurchaseRequest) {
-        return ticketPurchaseService.purchaseTicket(ticketPurchaseRequest);
+        Long currentPassengerId = authenticationContextService.getCurrentUserId();
+        return ticketPurchaseService.purchaseTicket(ticketPurchaseRequest, currentPassengerId);
     }
 }

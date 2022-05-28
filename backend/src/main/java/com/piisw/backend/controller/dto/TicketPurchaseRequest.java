@@ -14,10 +14,6 @@ import javax.validation.constraints.NotNull;
 public class TicketPurchaseRequest {
     @NotNull(message = "error.cannotBeBlank")
     @Schema(required = true)
-    private Long passengerId;
-
-    @NotNull(message = "error.cannotBeBlank")
-    @Schema(required = true)
     private Long ticketId;
 
     @NotNull(message = "error.cannotBeBlank")
