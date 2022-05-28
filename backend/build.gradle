@@ -44,9 +44,9 @@ dependencies {
 	implementation "org.modelmapper:modelmapper:$modelMapperVersion"
 	implementation "com.github.javafaker:javafaker:$javaFakerVersion"
 	implementation 'org.mapstruct:mapstruct:1.5.0.RC1'
-	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.0.RC1'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.0.RC1'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testImplementation "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"

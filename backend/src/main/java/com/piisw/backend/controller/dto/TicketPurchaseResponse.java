@@ -16,7 +16,7 @@ public class TicketPurchaseResponse {
     private Long id;
 
     @Schema(required = true)
-    private TicketResponse ticketResponse;
+    private TicketResponse ticket;
 
     @Schema(required = true)
     private TicketPrice price;

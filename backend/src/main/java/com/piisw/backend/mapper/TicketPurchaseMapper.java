@@ -12,9 +12,9 @@ import static com.piisw.backend.mapper.TicketMapper.TICKET_TO_TICKET_RESPONSE;
 @Mapper(config = MapStructConfig.class, uses = TicketMapper.class)
 public interface TicketPurchaseMapper {
 
-    @Mapping(target = "ticketResponse", source = "ticket", qualifiedByName = TICKET_TO_TICKET_RESPONSE)
+    @Mapping(target = "ticket", source = "ticket", qualifiedByName = TICKET_TO_TICKET_RESPONSE)
     TicketPurchaseResponse mapToTicketPurchaseResponse(TicketPurchase ticketPurchase);
 
-    @Mapping(target = "ticketResponse", source = "ticket", qualifiedByName = TICKET_TO_TICKET_RESPONSE)
+    @Mapping(target = "ticket", source = "ticket", qualifiedByName = TICKET_TO_TICKET_RESPONSE)
     TicketPurchaseResponse mapToTicketPurchaseResponse(LongTermTicketPurchase ticketPurchase);
 }
