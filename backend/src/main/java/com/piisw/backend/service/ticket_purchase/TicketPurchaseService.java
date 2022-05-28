@@ -4,6 +4,7 @@ import com.piisw.backend.controller.dto.TicketPurchaseRequest;
 import com.piisw.backend.controller.dto.TicketPurchaseResponse;
 import com.piisw.backend.entity.ticket.Ticket;
 import com.piisw.backend.entity.ticket.TicketPrice;
+import com.piisw.backend.entity.ticket.TicketType;
 import com.piisw.backend.entity.ticket_purchase.LongTermTicketPurchase;
 import com.piisw.backend.entity.ticket_purchase.ShortTermTicketPurchase;
 import com.piisw.backend.entity.ticket_purchase.SingleTicketPurchase;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -51,7 +54,23 @@ public class TicketPurchaseService {
 
         ticketPurchase = ticketPurchaseRepository.save(ticketPurchase);
 
-        return ticketPurchaseMapper.mapToTicketPurchaseResponse(ticketPurchase);
+        return ticket.getTicketType().equals(TicketType.LONG_TERM) ?
+                ticketPurchaseMapper.mapToTicketPurchaseResponse((LongTermTicketPurchase) ticketPurchase)
+                : ticketPurchaseMapper.mapToTicketPurchaseResponse(ticketPurchase);
+    }
+
+    @Transactional(readOnly = true)
+    public List<TicketPurchaseResponse> getAllMyTickets(Long currentPassengerId) {
+        Passenger passenger = passengerRepository.getById(currentPassengerId);
+        List<TicketPurchase> ticketPurchases = ticketPurchaseRepository.findAllByPassenger(passenger);
+
+        return ticketPurchases.stream()
+                .map(ticketPurchase ->
+                        ticketPurchase.getTicket().getTicketType().equals(TicketType.LONG_TERM) ?
+                                ticketPurchaseMapper.mapToTicketPurchaseResponse((LongTermTicketPurchase) ticketPurchase)
+                                : ticketPurchaseMapper.mapToTicketPurchaseResponse(ticketPurchase)
+                )
+                .collect(Collectors.toList());
     }
 
     private void validatePurchaseOfLongTermTicket(TicketPurchaseRequest ticketPurchaseRequest) {

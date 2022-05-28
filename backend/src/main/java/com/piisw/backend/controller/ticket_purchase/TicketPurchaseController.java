@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 import static com.piisw.backend.security.AuthorizationConstants.HAS_ROLE_PASSENGER;
 import static org.springframework.http.HttpStatus.CREATED;
@@ -27,5 +28,12 @@ public class TicketPurchaseController extends BaseController {
     public TicketPurchaseResponse purchaseTicket(@RequestBody @Valid TicketPurchaseRequest ticketPurchaseRequest) {
         Long currentPassengerId = authenticationContextService.getCurrentUserId();
         return ticketPurchaseService.purchaseTicket(ticketPurchaseRequest, currentPassengerId);
+    }
+
+    @PreAuthorize(HAS_ROLE_PASSENGER)
+    @GetMapping
+    public List<TicketPurchaseResponse> getAllMineTickets() {
+        Long currentPassengerId = authenticationContextService.getCurrentUserId();
+        return ticketPurchaseService.getAllMyTickets(currentPassengerId);
     }
 }
