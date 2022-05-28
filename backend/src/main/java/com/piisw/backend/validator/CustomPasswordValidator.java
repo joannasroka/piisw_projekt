@@ -28,6 +28,7 @@ public class CustomPasswordValidator {
     private static org.passay.CharacterData DIGIT_CHARS;
     private static CharacterRule DIGIT_RULE;
     private static CharacterRule SPECIAL_CHAR_RULE;
+    private static WhitespaceRule WHITESPACE_RULE;
 
     static {
         PASSWORD_LENGTH_RULE = new LengthRule(PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH);
@@ -44,6 +45,8 @@ public class CustomPasswordValidator {
         DIGIT_RULE = new CharacterRule(DIGIT_CHARS);
         DIGIT_RULE.setNumberOfCharacters(SPECIAL_CHARACTERS_AMOUNT);
 
+        WHITESPACE_RULE = new WhitespaceRule();
+
         org.passay.CharacterData specialChars = new CharacterData() {
             public String getErrorCode() {
                 return "ERROR_CODE";
@@ -56,7 +59,8 @@ public class CustomPasswordValidator {
         SPECIAL_CHAR_RULE = new CharacterRule(specialChars);
         SPECIAL_CHAR_RULE.setNumberOfCharacters(DIGITS_AMOUNT);
 
-        PASSWORD_VALIDATOR = new PasswordValidator(List.of(UPPER_CASE_RULE, LOWER_CASE_RULE, DIGIT_RULE, SPECIAL_CHAR_RULE, PASSWORD_LENGTH_RULE));
+        PASSWORD_VALIDATOR = new PasswordValidator(List.of(UPPER_CASE_RULE, LOWER_CASE_RULE, DIGIT_RULE,
+                SPECIAL_CHAR_RULE, PASSWORD_LENGTH_RULE, WHITESPACE_RULE));
     }
 
     public boolean validate(String password) {
