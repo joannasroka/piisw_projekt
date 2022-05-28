@@ -1,11 +1,13 @@
 package com.piisw.backend.controller.ticket;
 
 import com.piisw.backend.controller.BaseController;
+import com.piisw.backend.controller.dto.TicketResponse;
 import com.piisw.backend.entity.ticket.Ticket;
 import com.piisw.backend.service.ticket.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,5 +25,11 @@ public class TicketController extends BaseController {
     @GetMapping
     public List<Ticket> getAllTickets() {
         return ticketService.getAll();
+    }
+
+    @PreAuthorize(HAS_ANY_USER_ROLE)
+    @GetMapping("/{ticketId}")
+    public TicketResponse getTicketById(@PathVariable Long ticketId) {
+        return ticketService.getById(ticketId);
     }
 }
