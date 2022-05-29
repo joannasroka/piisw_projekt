@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-//TODO Temporary configuration
 @Configuration
 public class CorsConfig {
 
@@ -15,9 +14,10 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD")
+                        .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
                         .allowedOrigins("http://localhost:4200", "http://localhost:63342/")
                         .allowedHeaders("*")
+                        .exposedHeaders("*")
                         .allowCredentials(true);
             }
         };
