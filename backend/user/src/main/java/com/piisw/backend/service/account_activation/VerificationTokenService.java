@@ -1,6 +1,7 @@
 package com.piisw.backend.service.account_activation;
 
 import com.piisw.backend.controller.dto.AccountActivationRequest;
+import com.piisw.backend.entity.account_activation.AccountStatus;
 import com.piisw.backend.entity.account_activation.VerificationToken;
 import com.piisw.backend.entity.user.User;
 import com.piisw.backend.exception.InvalidPasswordException;
@@ -16,8 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
-
-import static com.piisw.backend.entity.account_activation.AccountStatus.ACTIVE;
 
 @Service
 @RequiredArgsConstructor
@@ -56,7 +55,7 @@ public class VerificationTokenService {
 
         String encodedPassword = passwordEncoder.encode(userPassword);
         user.setPassword(encodedPassword);
-        user.setAccountStatus(ACTIVE);
+        user.setAccountStatus(AccountStatus.ACTIVE);
 
         tokenRepository.delete(verificationToken);
     }

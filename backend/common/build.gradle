@@ -1,0 +1,59 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.7'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.piisw'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+ext {
+    javaFakerVersion = "1.0.2"
+    jUnitVersion = "5.8.2"
+    mariaDbVersion = "3.0.4"
+    mockitoInlineVersion = "4.5.1"
+    modelMapperVersion = "3.1.0"
+    passayVersion = "1.6.1"
+    springdocOpenApiVersion = "1.6.8"
+    springStarterMailVersion = "2.6.7"
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.mariadb.jdbc:mariadb-java-client:$mariaDbVersion"
+    implementation "org.springdoc:springdoc-openapi-ui:$springdocOpenApiVersion"
+    implementation "org.springdoc:springdoc-openapi-data-rest:$springdocOpenApiVersion"
+    implementation "org.springdoc:springdoc-openapi-security:$springdocOpenApiVersion"
+    implementation "org.springframework.boot:spring-boot-starter-mail:$springStarterMailVersion"
+    implementation 'org.springframework.retry:spring-retry'
+    implementation "org.passay:passay:$passayVersion"
+    implementation "org.modelmapper:modelmapper:$modelMapperVersion"
+    implementation "com.github.javafaker:javafaker:$javaFakerVersion"
+    implementation 'org.mapstruct:mapstruct:1.5.0.RC1'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.0.RC1'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation "org.junit.jupiter:junit-jupiter-engine:$jUnitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$jUnitVersion"
+    testImplementation "org.mockito:mockito-inline:$mockitoInlineVersion"
+    testImplementation 'com.h2database:h2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
