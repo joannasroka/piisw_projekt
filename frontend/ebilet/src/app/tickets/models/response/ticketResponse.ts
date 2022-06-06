@@ -1,4 +1,4 @@
-import { TicketType } from "./ticketType";
+import { TicketType } from "../ticketType";
 
 export interface TicketResponse {
   id: number,
@@ -6,7 +6,7 @@ export interface TicketResponse {
   reducedPrice: number,
   name: string,
   ticketType: TicketType,
-  minutes: number | null,
-  hours: number | null,
-  days: number | null,
+  minutes?: number,
+  hours?: number,
+  days?: number,
 }

@@ -1,4 +1,4 @@
 export enum TicketPricingType {
-  REGULAR = "REGULAR",
+  REGULAR = "NORMAL",
   REDUCED = "REDUCED"
 }

@@ -2,3 +2,9 @@ button {
   margin-left: 0.5em;
 }
 
+mat-list-item {
+  box-shadow: none !important;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: 4px;
+  background-color: #fff;
+}

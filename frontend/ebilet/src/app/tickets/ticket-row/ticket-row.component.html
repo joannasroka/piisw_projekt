@@ -1,4 +1,4 @@
-<mat-list-item class="mat-card">
+<mat-list-item>
   <div>
     {{ticket?.name}}
   </div>
@@ -9,7 +9,7 @@
   <div *ngIf="ticketPricingType == TicketPricingType.REDUCED">
     {{ticket.reducedPrice | currency}}
   </div>
-  <button mat-icon-button>
+  <button mat-icon-button (click)="buyButtonClicked()">
     <mat-icon>shopping_cart</mat-icon>
   </button>
 </mat-list-item>

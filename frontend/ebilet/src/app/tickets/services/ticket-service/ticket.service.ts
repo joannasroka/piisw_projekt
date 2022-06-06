@@ -18,4 +18,8 @@ export class TicketService {
   getTickets(): Observable<TicketResponse[]> {
     return this.http.get<TicketResponse[]>(`${this.apiURL}`, {withCredentials: true});
   }
+
+  getTicketById(ticketId: string): Observable<TicketResponse> {
+    return this.http.get<TicketResponse>(`${this.apiURL}/${ticketId}`, {withCredentials: true});
+  }
 }

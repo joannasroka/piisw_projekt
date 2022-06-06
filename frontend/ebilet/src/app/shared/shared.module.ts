@@ -13,29 +13,36 @@ import { MatPasswordStrengthModule } from "@angular-material-extensions/password
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
+import { DetailsTableComponent } from './details-table/details-table.component';
+import { MatTableModule } from "@angular/material/table";
+import { YesNoDialogComponent } from './dialog/yes-no-dialog/yes-no-dialog.component';
 
 @NgModule({
   declarations: [
     LoadingSpinnerComponent,
     IconSnackbarComponent,
     SimpleInfoDialogComponent,
-    PasswordInputComponent
+    PasswordInputComponent,
+    DetailsTableComponent,
+    YesNoDialogComponent
   ],
   exports: [
     LoadingSpinnerComponent,
-    PasswordInputComponent
+    PasswordInputComponent,
+    DetailsTableComponent
   ],
-  imports: [
-    CommonModule,
-    MatProgressSpinnerModule,
-    MatIconModule,
-    MatSnackBarModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatPasswordStrengthModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule
-  ]
+    imports: [
+        CommonModule,
+        MatProgressSpinnerModule,
+        MatIconModule,
+        MatSnackBarModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatPasswordStrengthModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatTableModule
+    ]
 })
 export class SharedModule { }
