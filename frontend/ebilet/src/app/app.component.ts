@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { Observable } from "rxjs";
-import { BreakpointObserver, Breakpoints } from "@angular/cdk/layout";
-import { map, shareReplay } from "rxjs/operators";
 import { UserAuth } from "./authentication/models/userAuth";
 import { UserRole } from "./authentication/models/userRole";
 import { AuthenticationService } from './authentication/services/authentication-service/authentication.service';
 import { Router } from "@angular/router";
 import { SnackbarService } from "./shared/snackbar/snackbar-service/snackbar.service";
+import { LayoutService } from './shared/layout-service/layout.service';
 
 @Component({
   selector: 'app-root',
@@ -18,16 +17,13 @@ export class AppComponent {
   readonly UserRole = UserRole;
   loading = false;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches),
-      shareReplay()
-    );
+  isHandset$: Observable<boolean>;
 
-  constructor(private breakpointObserver: BreakpointObserver,
-              private router: Router,
+  constructor(private router: Router,
               private snackbarService: SnackbarService,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private layoutService: LayoutService) {
+    this.isHandset$ = this.layoutService.isHandset$;
     this.authenticationService.userAuthObservable.subscribe(x => this.userAuth = x);
     this.authenticationService.readStoredUserAuth();
   }

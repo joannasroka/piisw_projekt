@@ -11,7 +11,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { LandingPageComponent } from './landing-page/landing-page.component';
-import { MatRippleModule } from "@angular/material/core";
+import { MatNativeDateModule, MatRippleModule } from "@angular/material/core";
 import { AuthenticationModule } from "./authentication/authentication.module";
 import { SharedModule } from "./shared/shared.module";
 import { HttpClientModule } from "@angular/common/http";
@@ -42,7 +42,8 @@ import { TicketsModule } from './tickets/tickets.module';
         MatMenuModule,
         UserModule,
         MatPasswordStrengthModule.forRoot(),
-        TicketsModule
+        TicketsModule,
+        MatNativeDateModule
     ],
   providers: [],
   bootstrap: [AppComponent]

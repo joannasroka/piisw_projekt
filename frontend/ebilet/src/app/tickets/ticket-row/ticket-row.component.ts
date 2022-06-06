@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TicketResponse } from "../models/response/ticketResponse";
 import { TicketPricingType } from "../models/ticketPricingType";
 
@@ -10,12 +10,17 @@ import { TicketPricingType } from "../models/ticketPricingType";
 export class TicketRowComponent implements OnInit {
   @Input() ticket!: TicketResponse;
   @Input() ticketPricingType!: TicketPricingType ;
+  @Output() buyTicketEvent = new EventEmitter<TicketResponse>();
 
   TicketPricingType = TicketPricingType;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  buyButtonClicked(): void {
+    this.buyTicketEvent.emit(this.ticket);
   }
 
 }

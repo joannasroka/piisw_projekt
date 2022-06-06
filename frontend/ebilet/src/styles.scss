@@ -31,7 +31,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 1em !important;
 }
 
-.panelContainer {
+.no-mobilePadding {
+  padding: 0 !important;
+}
+
+.contentContainer {
   padding: 2em;
   display: flex;
   justify-content: center;
@@ -56,4 +60,77 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .snackbar-error {
   background-color: #bf5555;
   color: white;
+}
+
+//table style compliant with Material Design guidelines
+.mat-table {
+  width: 100%;
+
+  .mat-header-row {
+    height: 48px;
+  }
+
+  .mat-header-cell {
+    padding-left: 16px;
+    padding-right: 40px;
+
+
+    &:first-of-type {
+      padding-left: 16px;
+    }
+
+    &:last-of-type {
+      padding-right: 16px;
+
+      &[mat-sort-header]:not([arrowposition="before"]) {
+        padding-right: 16px;
+      }
+    }
+
+    &[mat-sort-header] {
+
+      &[arrowposition="before"] {
+        padding-left: 0;
+      }
+
+      &:not([arrowposition="before"]) {
+        padding-right: 22px;
+      }
+
+    }
+
+    &>.mat-sort-header-container {
+      display: inline-flex;
+    }
+  }
+
+  .mat-cell {
+    padding: 8px 40px 8px 16px;
+
+    &:first-of-type {
+      padding-left: 16px;
+    }
+
+    &:last-of-type {
+      padding-right: 16px;
+    }
+  }
+
+  .mat-footer-cell {
+    padding-left: 16px;
+    padding-right: 40px;
+
+    &:first-of-type {
+      padding-left: 16px;
+    }
+
+    &:last-of-type {
+      padding-right: 16px;
+    }
+
+    .mat-paginator {
+      margin-left: -16px;
+      margin-right: -16px;
+    }
+  }
 }

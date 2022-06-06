@@ -1,0 +1,13 @@
+.backButton {
+  margin-right: 6px;
+}
+
+.validThroughDateField{
+  .mat-input-element:disabled {
+    color: currentColor;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+}

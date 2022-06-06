@@ -1,0 +1,57 @@
+<app-loading-spinner [show]="loading"></app-loading-spinner>
+<mat-toolbar>
+  <button mat-icon-button routerLink="/browseTickets">
+    <mat-icon>arrow_back_ios</mat-icon>
+  </button>
+  <div class="toolbarTitle">Buy ticket - {{ticketToBuy.name}}</div>
+</mat-toolbar>
+<div class="contentContainer" ngClass.xs="no-mobilePadding">
+  <mat-stepper orientation="vertical" linear="true" #stepper fxFlex.xs="100%" fxFlex.sm="87.5%" fxFlex.md="75%" fxFlex.lg="62.5%" fxFlex.xl="50%">
+    <mat-step [editable]="!isPurchaseCompleted">
+      <ng-template matStepLabel>Ticket summary</ng-template>
+      <app-details-table [detailsArray]="ticketDetails"></app-details-table>
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-flat-button color="primary" matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step *ngIf="this.ticketToBuy.ticketType == TicketType.LONG_TERM" [editable]="!isPurchaseCompleted" [stepControl]="dateFormControl">
+      <ng-template matStepLabel>Validity start date</ng-template>
+      <mat-form-field appearance="outline">
+        <mat-label>Valid from</mat-label>
+        <input required matInput [min]="todayDate" [matDatepicker]="picker" [formControl]="dateFormControl">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker [touchUi]="(isHandset$ | async)" #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline" *ngIf="dateFormControl.valid" class="validThroughDateField">
+        <mat-label>Valid through</mat-label>
+        <button disabled mat-icon-button matSuffix></button>
+        <input disabled matInput [value]="getValidThroughDate()">
+      </mat-form-field>
+
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button matStepperPrevious class="backButton">Back</button>
+        <button mat-flat-button color="primary" [disabled]="dateFormControl.invalid" matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step [editable]="!isPurchaseCompleted">
+      <ng-template matStepLabel>Payment</ng-template>
+      <h3>Payment goes here!</h3>
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-button matStepperPrevious class="backButton">Back</button>
+        <button mat-flat-button color="primary" (click)="promptForPurchaseConfirmation()">
+          <mat-icon>shopping_cart</mat-icon>
+          Buy
+        </button>
+      </div>
+    </mat-step>
+    <mat-step [editable]="!isPurchaseCompleted">
+      <ng-template matStepLabel>Done</ng-template>
+      <h3>You have successfully purchased a ticket!</h3>
+      <h3>Ticket verification code: {{this.purchasedTicketValidationCode}}</h3>
+      <div fxLayout="row" fxLayoutAlign="end center">
+        <button mat-flat-button color="primary" routerLink="/myTickets">Go to "My tickets"</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>
+
