@@ -19,9 +19,10 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -39,10 +40,6 @@ public class DataInitializer implements CommandLineRunner {
     private static final int REGISTERED_PASSENGER_AMOUNT = 3;
 
     private static final int INSPECTOR_AMOUNT = 3;
-
-    private static final int SINGLE_TICKETS_AMOUNT = 1;
-    private static final int SHORT_TERM_TICKETS_AMOUNT = 3;
-    private static final int LONG_TERM_TICKETS_AMOUNT = 5;
 
     private final PassengerRepository passengerRepository;
     private final InspectorRepository inspectorRepository;
@@ -132,42 +129,39 @@ public class DataInitializer implements CommandLineRunner {
         List<Ticket> shortTermTickets = new ArrayList<>();
         List<Ticket> longTermTickets = new ArrayList<>();
 
-        IntStream.range(0, SINGLE_TICKETS_AMOUNT).forEach(i -> singleTickets.add(createSingleTicket(i)));
-        IntStream.range(0, SHORT_TERM_TICKETS_AMOUNT).forEach(i -> shortTermTickets.add(createShortTermTicket(i)));
-        IntStream.range(0, LONG_TERM_TICKETS_AMOUNT).forEach(i -> longTermTickets.add(createLongTermTicket(i)));
+        BigDecimal price = BigDecimal.valueOf(4.6);
+        singleTickets.add(new SingleTicket(price, price.divide(BigDecimal.valueOf(2.0)), "Single ticket"));
+
+        price = BigDecimal.valueOf(3.2);
+        shortTermTickets.add(new ShortTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "15-minute ticket", 15, 0));
+        price = BigDecimal.valueOf(4.0);
+        shortTermTickets.add(new ShortTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "30-minute ticket", 30, 0));
+        price = BigDecimal.valueOf(5.2);
+        shortTermTickets.add(new ShortTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "60-minute ticket", 60, 0));
+        price = BigDecimal.valueOf(7.0);
+        shortTermTickets.add(new ShortTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "90-minute ticket", 90, 0));
+        price = BigDecimal.valueOf(15.0);
+        shortTermTickets.add(new ShortTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "24-hour ticket", 0, 24));
+        price = BigDecimal.valueOf(26.0);
+        shortTermTickets.add(new ShortTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "48-hour ticket", 0, 48));
+        price = BigDecimal.valueOf(32.0);
+        shortTermTickets.add(new ShortTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "72-hour ticket", 0, 72));
+
+        price = BigDecimal.valueOf(38.0);
+        longTermTickets.add(new LongTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "7-day ticket", 7));
+        price = BigDecimal.valueOf(110.0);
+        longTermTickets.add(new LongTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "30-day ticket", 30));
+        price = BigDecimal.valueOf(208.0);
+        longTermTickets.add(new LongTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "60-day ticket", 60));
+        price = BigDecimal.valueOf(208.0);
+        longTermTickets.add(new LongTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "90-day ticket", 90));
+        price = BigDecimal.valueOf(560.0);
+        longTermTickets.add(new LongTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "180-day ticket", 180));
+        price = BigDecimal.valueOf(1050.0);
+        longTermTickets.add(new LongTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), "365-day ticket", 365));
+
 
         ticketRepository.saveAll(Stream.of(singleTickets, shortTermTickets, longTermTickets)
                 .flatMap(Collection::stream).collect(Collectors.toList()));
-    }
-
-    private SingleTicket createSingleTicket(int number) {
-        String name = "Single ticket " + number;
-        BigDecimal price = getRandomTicketPrice();
-
-        return new SingleTicket(price, price.divide(BigDecimal.valueOf(2.0)), name);
-    }
-
-    private ShortTermTicket createShortTermTicket(int number) {
-        String name = "Short term ticket " + number;
-        BigDecimal price = getRandomTicketPrice();
-
-        int minutes = ThreadLocalRandom.current().nextInt(0, 30);
-        int hours = ThreadLocalRandom.current().nextInt(0, 24);
-
-        return new ShortTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), name, minutes, hours);
-    }
-
-    private LongTermTicket createLongTermTicket(int number) {
-        String name = "Long term ticket " + number;
-        BigDecimal price = getRandomTicketPrice();
-
-        int days = ThreadLocalRandom.current().nextInt(0, 365);
-
-        return new LongTermTicket(price, price.divide(BigDecimal.valueOf(2.0)), name, days);
-    }
-
-    private BigDecimal getRandomTicketPrice() {
-        BigInteger bigInteger = BigInteger.probablePrime(6, new Random());
-        return new BigDecimal(bigInteger);
     }
 }
