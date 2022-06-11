@@ -28,8 +28,4 @@ public class TicketPurchaseResponse {
 
     @Schema(required = true)
     private TicketPurchaseStatus ticketPurchaseStatus;
-
-    private LocalDateTime dateTimeOfValidation;
-
-    private LocalDateTime validityStartDateTime;
 }

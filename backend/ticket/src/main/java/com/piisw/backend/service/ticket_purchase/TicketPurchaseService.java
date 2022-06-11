@@ -4,7 +4,6 @@ import com.piisw.backend.controller.dto.ticket_purchase.TicketPurchaseRequest;
 import com.piisw.backend.controller.dto.ticket_purchase.TicketPurchaseResponse;
 import com.piisw.backend.entity.ticket.Ticket;
 import com.piisw.backend.entity.ticket.TicketPrice;
-import com.piisw.backend.entity.ticket.TicketType;
 import com.piisw.backend.entity.ticket_purchase.LongTermTicketPurchase;
 import com.piisw.backend.entity.ticket_purchase.ShortTermTicketPurchase;
 import com.piisw.backend.entity.ticket_purchase.SingleTicketPurchase;
@@ -54,9 +53,7 @@ public class TicketPurchaseService {
 
         ticketPurchase = ticketPurchaseRepository.save(ticketPurchase);
 
-        return ticket.getTicketType().equals(TicketType.LONG_TERM) ?
-                ticketPurchaseMapper.mapToTicketPurchaseResponse((LongTermTicketPurchase) ticketPurchase)
-                : ticketPurchaseMapper.mapToTicketPurchaseResponse(ticketPurchase);
+        return mapToTicketPurchaseResponse(ticketPurchase);
     }
 
     @Transactional(readOnly = true)
@@ -65,11 +62,7 @@ public class TicketPurchaseService {
         List<TicketPurchase> ticketPurchases = ticketPurchaseRepository.findAllByPassenger(passenger);
 
         return ticketPurchases.stream()
-                .map(ticketPurchase ->
-                        ticketPurchase.getTicket().getTicketType().equals(TicketType.LONG_TERM) ?
-                                ticketPurchaseMapper.mapToTicketPurchaseResponse((LongTermTicketPurchase) ticketPurchase)
-                                : ticketPurchaseMapper.mapToTicketPurchaseResponse(ticketPurchase)
-                )
+                .map(this::mapToTicketPurchaseResponse)
                 .collect(Collectors.toList());
     }
 
@@ -78,6 +71,19 @@ public class TicketPurchaseService {
             throw new InvalidLongTermTicketPurchaseException();
         if (ticketPurchaseRequest.getValidityStartDate().isBefore(LocalDate.now()))
             throw new ValidityStartDatePassedException();
+    }
+
+    private TicketPurchaseResponse mapToTicketPurchaseResponse(TicketPurchase ticketPurchase) {
+        if (ticketPurchase instanceof SingleTicketPurchase) {
+            return ticketPurchaseMapper.mapToTicketPurchaseResponse((SingleTicketPurchase) ticketPurchase);
+        }
+        if (ticketPurchase instanceof ShortTermTicketPurchase) {
+            return ticketPurchaseMapper.mapToTicketPurchaseResponse((ShortTermTicketPurchase) ticketPurchase);
+        }
+        if (ticketPurchase instanceof LongTermTicketPurchase) {
+            return ticketPurchaseMapper.mapToTicketPurchaseResponse((LongTermTicketPurchase) ticketPurchase);
+        }
+        return null;
     }
 
 }
