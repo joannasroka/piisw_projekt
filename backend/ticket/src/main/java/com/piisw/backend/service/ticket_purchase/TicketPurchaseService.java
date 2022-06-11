@@ -53,7 +53,7 @@ public class TicketPurchaseService {
 
         ticketPurchase = ticketPurchaseRepository.save(ticketPurchase);
 
-        return mapToTicketPurchaseResponse(ticketPurchase);
+        return ticketPurchaseMapper.mapToTicketPurchaseResponse(ticketPurchase);
     }
 
     @Transactional(readOnly = true)
@@ -62,7 +62,7 @@ public class TicketPurchaseService {
         List<TicketPurchase> ticketPurchases = ticketPurchaseRepository.findAllByPassenger(passenger);
 
         return ticketPurchases.stream()
-                .map(this::mapToTicketPurchaseResponse)
+                .map(ticketPurchaseMapper::mapToTicketPurchaseResponse)
                 .collect(Collectors.toList());
     }
 
@@ -72,18 +72,4 @@ public class TicketPurchaseService {
         if (ticketPurchaseRequest.getValidityStartDate().isBefore(LocalDate.now()))
             throw new ValidityStartDatePassedException();
     }
-
-    private TicketPurchaseResponse mapToTicketPurchaseResponse(TicketPurchase ticketPurchase) {
-        if (ticketPurchase instanceof SingleTicketPurchase) {
-            return ticketPurchaseMapper.mapToTicketPurchaseResponse((SingleTicketPurchase) ticketPurchase);
-        }
-        if (ticketPurchase instanceof ShortTermTicketPurchase) {
-            return ticketPurchaseMapper.mapToTicketPurchaseResponse((ShortTermTicketPurchase) ticketPurchase);
-        }
-        if (ticketPurchase instanceof LongTermTicketPurchase) {
-            return ticketPurchaseMapper.mapToTicketPurchaseResponse((LongTermTicketPurchase) ticketPurchase);
-        }
-        return null;
-    }
-
 }

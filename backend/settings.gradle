@@ -1,4 +1,5 @@
 rootProject.name = 'backend'
-include('user', 'ticket')
+include('user', 'ticket', 'ticket-puncher')
 include 'common'
+include 'application'
 
