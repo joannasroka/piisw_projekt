@@ -25,9 +25,13 @@ public class LongTermTicketPurchase extends TicketPurchase {
     @Column(name = "validity_start_date_time")
     private LocalDateTime validityStartDateTime;
 
+    @Column(name = "validity_end_date_time")
+    private LocalDateTime validityEndDateTime;
+
     public LongTermTicketPurchase(Passenger passenger, Ticket ticket, TicketPrice ticketPrice, LocalDateTime validityStartDateTime) {
         super(passenger, ticket, ticketPrice, LocalDateTime.now());
         this.validityStartDateTime = validityStartDateTime;
+        this.validityEndDateTime = validityStartDateTime.plusDays(((LongTermTicket) getTicket()).getDays());
     }
 
     @Override
@@ -38,7 +42,6 @@ public class LongTermTicketPurchase extends TicketPurchase {
     @Override
     public TicketPurchaseStatus getTicketPurchaseStatus() {
         if (validityStartDateTime.isAfter(LocalDateTime.now())) return TicketPurchaseStatus.INACTIVE;
-        LocalDateTime validityEndDateTime = validityStartDateTime.plusDays(((LongTermTicket) getTicket()).getDays());
 
         if (!validityEndDateTime.isBefore(LocalDateTime.now())) return TicketPurchaseStatus.ACTIVE;
         return TicketPurchaseStatus.INVALID;

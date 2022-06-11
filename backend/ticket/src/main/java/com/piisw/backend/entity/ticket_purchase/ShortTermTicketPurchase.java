@@ -26,6 +26,9 @@ public class ShortTermTicketPurchase extends TicketPurchase {
     @Column(name = "date_time_of_validation")
     private LocalDateTime dateTimeOfValidation;
 
+    @Column(name = "validity_end_date_time")
+    private LocalDateTime validityEndDateTime;
+
     public ShortTermTicketPurchase(Passenger passenger, Ticket ticket, TicketPrice ticketPrice) {
         super(passenger, ticket, ticketPrice, LocalDateTime.now());
     }

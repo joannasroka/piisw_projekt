@@ -1,6 +1,7 @@
 package com.piisw.backend.service;
 
 import com.piisw.backend.controller.dto.ticket_purchase.TicketPurchaseResponse;
+import com.piisw.backend.entity.ticket.ShortTermTicket;
 import com.piisw.backend.entity.ticket_purchase.*;
 import com.piisw.backend.entity.user.Passenger;
 import com.piisw.backend.exception.InvalidTicketCannotBePunchedException;
@@ -55,7 +56,10 @@ public class TicketPuncherService {
         }
 
         if (ticketPurchase instanceof ShortTermTicketPurchase) {
-            ((ShortTermTicketPurchase) ticketPurchase).setDateTimeOfValidation(LocalDateTime.now());
+            LocalDateTime dateTimeOfValidation = LocalDateTime.now();
+            ShortTermTicket ticket = (ShortTermTicket) ticketPurchase.getTicket();
+            ((ShortTermTicketPurchase) ticketPurchase).setDateTimeOfValidation(dateTimeOfValidation);
+            ((ShortTermTicketPurchase) ticketPurchase).setValidityEndDateTime(dateTimeOfValidation.plusHours(ticket.getHours()).plusMinutes(ticket.getMinutes()));
         }
     }
 }

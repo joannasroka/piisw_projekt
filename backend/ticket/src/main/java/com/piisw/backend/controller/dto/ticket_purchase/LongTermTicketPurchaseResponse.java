@@ -11,4 +11,6 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class LongTermTicketPurchaseResponse extends TicketPurchaseResponse {
     private LocalDateTime validityStartDateTime;
+
+    private LocalDateTime validityEndDateTime;
 }
