@@ -66,6 +66,12 @@ public class TicketPurchaseService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public TicketPurchaseResponse getTicketPurchaseById(Long ticketPurchaseId) {
+        TicketPurchase ticketPurchase = ticketPurchaseRepository.getById(ticketPurchaseId);
+        return ticketPurchaseMapper.mapToTicketPurchaseResponse(ticketPurchase);
+    }
+
     private void validatePurchaseOfLongTermTicket(TicketPurchaseRequest ticketPurchaseRequest) {
         if (ticketPurchaseRequest.getValidityStartDate() == null)
             throw new InvalidLongTermTicketPurchaseException();

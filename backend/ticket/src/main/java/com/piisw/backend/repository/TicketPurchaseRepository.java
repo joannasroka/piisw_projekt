@@ -17,4 +17,8 @@ public interface TicketPurchaseRepository extends JpaRepository<TicketPurchase, 
     default TicketPurchase findByIdAndPassenger(Long id, Passenger passenger) {
         return getByIdAndPassenger(id, passenger).orElseThrow(DatabaseEntityNotFoundException::new);
     }
+
+    default TicketPurchase getById(Long id) {
+        return findById(id).orElseThrow(DatabaseEntityNotFoundException::new);
+    }
 }
