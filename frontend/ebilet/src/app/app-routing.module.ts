@@ -12,6 +12,7 @@ import { TicketsResolver } from "./tickets/resolvers/tickets-resolver/tickets.re
 import { BuyTicketComponent } from './tickets/buy-ticket/buy-ticket.component';
 import { BuyTicketResolver } from './tickets/resolvers/buy-ticket-resolver/buy-ticket.resolver';
 import { MyTicketsComponent } from './tickets/my-tickets/my-tickets.component';
+import { MyTicketsResolver } from './tickets/resolvers/my-tickets-resolver/my-tickets.resolver';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent, canActivate: [NotAuthGuard]},
@@ -21,7 +22,7 @@ const routes: Routes = [
   { path: 'confirmSignup', component: ConfirmSignupComponent, canActivate: [TokenGuard, NotAuthGuard]},
   { path: 'browseTickets', component: BrowseTicketsComponent, resolve: {tickets: TicketsResolver}, canActivate: [AuthGuard]},
   { path: 'buyTicket', component: BuyTicketComponent, resolve: {ticketToBuy: BuyTicketResolver}, canActivate: [AuthGuard]},
-  { path: 'myTickets', component: MyTicketsComponent, canActivate: [AuthGuard]},
+  { path: 'myTickets', component: MyTicketsComponent, resolve: {myTickets: MyTicketsResolver}, canActivate: [AuthGuard]},
   // otherwise redirect to landing page
   { path: '**', redirectTo: 'landingPage'}
 ];

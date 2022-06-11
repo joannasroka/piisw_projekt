@@ -93,18 +93,18 @@ export class BuyTicketComponent implements OnInit {
   getValidThroughDate(): string {
     const validThroughDate = new Date(this.dateFormControl.value);
     validThroughDate.setDate(validThroughDate.getDate() + this.ticketToBuy.days!);
-    return validThroughDate.toLocaleDateString();
+    return validThroughDate.toLocaleDateString('en-US');
   }
 
   getValidFromDate(): string {
-    return this.dateFormControl.value.toLocaleDateString();
+    return this.dateFormControl.value.toLocaleDateString('en-US');
   }
 
   getValidityStartDateForRequest(): string {
     let startDate = this.dateFormControl.value;
-    const offset = startDate.getTimezoneOffset()
-    startDate = new Date(startDate.getTime() - (offset*60*1000))
-    return startDate.toISOString().split('T')[0]
+    const offset = startDate.getTimezoneOffset();
+    startDate = new Date(startDate.getTime() - (offset*60*1000));
+    return startDate.toISOString().split('T')[0];
   }
 
   promptForPurchaseConfirmation(): void {

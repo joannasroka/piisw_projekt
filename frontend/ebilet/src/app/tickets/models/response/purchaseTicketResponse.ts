@@ -1,12 +1,17 @@
 import { TicketResponse } from "./ticketResponse";
 import { TicketPricingType } from "../ticketPricingType";
+import { PurchaseTicketStatus } from "../purchaseTicketStatus";
 
 export interface PurchaseTicketResponse {
   id: number,
   ticket: TicketResponse,
   price: TicketPricingType,
   dateOfPurchase: Date,
-  dateTimeOfValidation: Date,
-  validityStartDateTime: Date,
-  valid: boolean
+  ticketPurchaseStatus: PurchaseTicketStatus,
+  //only for SINGLE and SHORT-TERM tickets
+  dateTimeOfValidation?: Date,
+  //only for LONG-TERM tickets
+  validityStartDateTime?: Date,
+  //only for ACTIVE tickets
+  validityEndDateTime?: Date
 }

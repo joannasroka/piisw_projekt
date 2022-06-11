@@ -19,6 +19,7 @@ import { MatMenuModule } from "@angular/material/menu";
 import { UserModule } from './user/user.module';
 import { MatPasswordStrengthModule } from "@angular-material-extensions/password-strength";
 import { TicketsModule } from './tickets/tickets.module';
+import { TimeagoModule } from "ngx-timeago";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { TicketsModule } from './tickets/tickets.module';
         UserModule,
         MatPasswordStrengthModule.forRoot(),
         TicketsModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        TimeagoModule.forRoot()
     ],
   providers: [],
   bootstrap: [AppComponent]

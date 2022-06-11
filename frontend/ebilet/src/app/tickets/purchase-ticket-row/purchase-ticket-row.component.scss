@@ -1,0 +1,16 @@
+.pricingTypeTitleLabel {
+  padding-left: 8px;
+  color: rgba(0,0,0,.54);
+}
+
+mat-expansion-panel {
+  mat-expansion-panel-header {
+    min-height: 48px;
+    height: auto;
+  }
+}
+
+h4 {
+  margin: 0;
+  font-weight: bold;
+}

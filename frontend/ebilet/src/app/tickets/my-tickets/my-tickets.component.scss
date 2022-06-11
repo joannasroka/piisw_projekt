@@ -1,0 +1,29 @@
+mat-button-toggle-group {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+mat-button-toggle {
+  width: 100%;
+}
+
+.mat-h2 {
+  margin: 0;
+}
+
+.categorySpacer {
+  padding-bottom: 16px;
+}
+
+.noTickets {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+  mat-icon {
+    font-size: 50px;
+    line-height: 50px;
+  }
+}

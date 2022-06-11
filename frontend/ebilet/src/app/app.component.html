@@ -7,7 +7,7 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLinkActive="active-list-item" routerLink="browseTickets">Browse tickets</a>
-      <a mat-list-item routerLinkActive="active-list-item" disabled *ngIf="isUserRolePassenger">My tickets</a>
+      <a mat-list-item routerLinkActive="active-list-item" *ngIf="isUserRolePassenger" routerLink="myTickets">My tickets</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

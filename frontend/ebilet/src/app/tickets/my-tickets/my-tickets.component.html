@@ -1,1 +1,40 @@
-<p>my-tickets works!</p>
+<mat-toolbar>
+  <div class="toolbarTitle">My tickets</div>
+</mat-toolbar>
+<div class="contentContainer" ngClass.xs="small-mobilePadding">
+  <div fxFlex.xs="100%" fxFlex.sm="87.5%" fxFlex.md="75%" fxFlex.lg="62.5%" fxFlex.xl="50%">
+    <mat-button-toggle-group [(ngModel)]="selectedTicketView">
+      <mat-button-toggle [value]="SelectedTicketView.CURRENT">Current tickets</mat-button-toggle>
+      <mat-button-toggle [value]="SelectedTicketView.HISTORY">History</mat-button-toggle>
+    </mat-button-toggle-group>
+    <div *ngIf="selectedTicketView == SelectedTicketView.CURRENT">
+      <div class="mat-h2">Active tickets</div>
+      <div *ngIf="getActiveTickets()?.length == 0" class="noTickets">
+        <mat-icon [inline]="true">info_outline</mat-icon>
+        You have no active tickets<br>To activate a ticket please validate one of your inactive tickets
+      </div>
+      <mat-list *ngFor="let ticket of getActiveTickets()">
+        <app-purchase-ticket-row [purchasedTicket]="ticket"></app-purchase-ticket-row>
+      </mat-list>
+      <div class="categorySpacer"></div>
+      <div class="mat-h2">Inactive tickets</div>
+      <div *ngIf="getInactiveTickets()?.length == 0" class="noTickets">
+        <mat-icon [inline]="true">info_outline</mat-icon>
+        You have no inactive tickets
+      </div>
+      <mat-list *ngFor="let ticket of getInactiveTickets()">
+        <app-purchase-ticket-row [purchasedTicket]="ticket"></app-purchase-ticket-row>
+      </mat-list>
+    </div>
+    <div *ngIf="selectedTicketView == SelectedTicketView.HISTORY">
+      <div class="mat-h2">Ticket history</div>
+      <div *ngIf="getHistoryTickets()?.length == 0" class="noTickets">
+        <mat-icon [inline]="true">info_outline</mat-icon>
+        You have no tickets in your history
+      </div>
+      <mat-list *ngFor="let ticket of getHistoryTickets()">
+        <app-purchase-ticket-row [purchasedTicket]="ticket"></app-purchase-ticket-row>
+      </mat-list>
+    </div>
+  </div>
+</div>

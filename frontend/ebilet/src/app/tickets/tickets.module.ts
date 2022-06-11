@@ -18,6 +18,9 @@ import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MyTicketsComponent } from './my-tickets/my-tickets.component';
+import { PurchaseTicketRowComponent } from './purchase-ticket-row/purchase-ticket-row.component';
+import { MatExpansionModule } from "@angular/material/expansion";
+import { TimeagoModule } from "ngx-timeago";
 
 
 @NgModule({
@@ -25,26 +28,29 @@ import { MyTicketsComponent } from './my-tickets/my-tickets.component';
     BrowseTicketsComponent,
     TicketRowComponent,
     BuyTicketComponent,
-    MyTicketsComponent
+    MyTicketsComponent,
+    PurchaseTicketRowComponent
   ],
-  imports: [
-    CommonModule,
-    MatToolbarModule,
-    FlexLayoutModule,
-    MatButtonToggleModule,
-    FormsModule,
-    MatCardModule,
-    MatListModule,
-    MatIconModule,
-    MatButtonModule,
-    MatStepperModule,
-    SharedModule,
-    RouterModule,
-    MatDatepickerModule,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        CommonModule,
+        MatToolbarModule,
+        FlexLayoutModule,
+        MatButtonToggleModule,
+        FormsModule,
+        MatCardModule,
+        MatListModule,
+        MatIconModule,
+        MatButtonModule,
+        MatStepperModule,
+        SharedModule,
+        RouterModule,
+        MatDatepickerModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatExpansionModule,
+        TimeagoModule
+    ],
   providers: [CurrencyPipe]
 })
 export class TicketsModule { }

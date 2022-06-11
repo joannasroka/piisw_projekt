@@ -12,7 +12,7 @@
       <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType" (buyTicketEvent)="buyTicketClicked($event)"></app-ticket-row>
     </mat-list>
     <div class="categorySpacer"></div>
-    <div class="mat-h2">Shor-term tickets</div>
+    <div class="mat-h2">Short-term tickets</div>
     <mat-list *ngFor="let ticket of getShortTermTickets()">
       <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType" (buyTicketEvent)="buyTicketClicked($event)"></app-ticket-row>
     </mat-list>

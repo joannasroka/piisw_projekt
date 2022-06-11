@@ -1,0 +1,20 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="ticketName">{{purchasedTicket?.ticket.name}}</div>
+        <span class="pricingTypeTitleLabel">({{(this.isHandset$ | async) ? this.pricingTypeShortString : this.pricingTypeString}})</span>
+      </mat-panel-title>
+      <mat-panel-description *ngIf="isActive() && purchasedTicket?.validityEndDateTime">
+        Valid for: {{purchasedTicket?.validityEndDateTime | timeago:true | slice:0:-9}}
+      </mat-panel-description>
+      <mat-panel-description *ngIf="isInactive() && purchasedTicket?.validityStartDateTime">
+        Valid from: {{getValidFromShortDate()}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <h4>Validation details</h4>
+    <app-details-table [detailsArray]="validationDetails"></app-details-table>
+    <h4>Ticket details</h4>
+    <app-details-table [detailsArray]="purchasedTicketDetails"></app-details-table>
+  </mat-expansion-panel>
+</mat-accordion>
