@@ -26,10 +26,4 @@ public class TicketResponse {
 
     @Schema(required = true)
     private TicketType ticketType;
-
-    private int days;
-
-    private int minutes;
-
-    private int hours;
 }

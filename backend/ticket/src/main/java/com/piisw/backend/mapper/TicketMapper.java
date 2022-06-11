@@ -1,7 +1,11 @@
 package com.piisw.backend.mapper;
 
 import com.piisw.backend.configuration.mapper.MapStructConfig;
+import com.piisw.backend.controller.dto.LongTimeTicketResponse;
+import com.piisw.backend.controller.dto.ShortTimeTicketResponse;
 import com.piisw.backend.controller.dto.TicketResponse;
+import com.piisw.backend.entity.ticket.LongTermTicket;
+import com.piisw.backend.entity.ticket.ShortTermTicket;
 import com.piisw.backend.entity.ticket.SingleTicket;
 import com.piisw.backend.entity.ticket.Ticket;
 import org.mapstruct.Mapper;
@@ -9,10 +13,17 @@ import org.mapstruct.Named;
 
 @Mapper(config = MapStructConfig.class)
 public interface TicketMapper {
-    public static final String TICKET_TO_TICKET_RESPONSE = "TicketToTicketResponse";
+    String TICKET_TO_TICKET_RESPONSE = "TicketToTicketResponse";
 
     @Named(TICKET_TO_TICKET_RESPONSE)
-    public TicketResponse mapToTicketResponse(Ticket ticket);
+    TicketResponse mapToTicketResponse(Ticket ticket);
 
-    public TicketResponse mapToTicketResponse(SingleTicket ticket);
+    @Named(TICKET_TO_TICKET_RESPONSE)
+    TicketResponse mapToTicketResponse(SingleTicket ticket);
+
+    @Named(TICKET_TO_TICKET_RESPONSE)
+    ShortTimeTicketResponse mapToTicketResponse(ShortTermTicket ticket);
+
+    @Named(TICKET_TO_TICKET_RESPONSE)
+    LongTimeTicketResponse mapToTicketResponse(LongTermTicket ticket);
 }

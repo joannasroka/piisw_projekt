@@ -1,6 +1,9 @@
 package com.piisw.backend.service.ticket;
 
 import com.piisw.backend.controller.dto.TicketResponse;
+import com.piisw.backend.entity.ticket.LongTermTicket;
+import com.piisw.backend.entity.ticket.ShortTermTicket;
+import com.piisw.backend.entity.ticket.SingleTicket;
 import com.piisw.backend.entity.ticket.Ticket;
 import com.piisw.backend.mapper.TicketMapper;
 import com.piisw.backend.repository.TicketRepository;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,11 +21,27 @@ public class TicketService {
     private final TicketRepository ticketRepository;
     private final TicketMapper ticketMapper;
 
-    public List<Ticket> getAll() {
-        return ticketRepository.findAll();
+    public List<TicketResponse> getAll() {
+        return ticketRepository.findAll().stream()
+                .map(this::mapToTicketResponse)
+                .collect(Collectors.toList());
     }
 
     public TicketResponse getById(Long ticketId) {
-        return ticketMapper.mapToTicketResponse(ticketRepository.getById(ticketId));
+        Ticket ticket = ticketRepository.getById(ticketId);
+        return mapToTicketResponse(ticket);
+    }
+
+    private TicketResponse mapToTicketResponse(Ticket ticket) {
+        if (ticket instanceof SingleTicket) {
+            return ticketMapper.mapToTicketResponse((SingleTicket) ticket);
+        }
+        if (ticket instanceof ShortTermTicket) {
+            return ticketMapper.mapToTicketResponse((ShortTermTicket) ticket);
+        }
+        if (ticket instanceof LongTermTicket) {
+            return ticketMapper.mapToTicketResponse((LongTermTicket) ticket);
+        }
+        return null;
     }
 }
