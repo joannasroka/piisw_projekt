@@ -42,7 +42,7 @@ jobs:
       - save_cache:
           paths:
             - ~/.gradle
-          key: v1-dependencies-{{ checksum "./backend/application/build.gradle" }}
+          key: v1-dependencies-{{ checksum "./backend/build.gradle" }}
 
       # run tests!
       - run: cd ./backend && ./gradlew test
