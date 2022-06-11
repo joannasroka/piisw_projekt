@@ -1,4 +1,4 @@
-package com.piisw.backend.controller.dto;
+package com.piisw.backend.controller.dto.ticket;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

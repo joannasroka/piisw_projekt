@@ -1,8 +1,8 @@
 package com.piisw.backend.controller.ticket_purchase;
 
 import com.piisw.backend.controller.BaseController;
-import com.piisw.backend.controller.dto.TicketPurchaseRequest;
-import com.piisw.backend.controller.dto.TicketPurchaseResponse;
+import com.piisw.backend.controller.dto.ticket_purchase.TicketPurchaseRequest;
+import com.piisw.backend.controller.dto.ticket_purchase.TicketPurchaseResponse;
 import com.piisw.backend.security.AuthenticationContextService;
 import com.piisw.backend.service.ticket_purchase.TicketPurchaseService;
 import lombok.RequiredArgsConstructor;

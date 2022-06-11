@@ -1,7 +1,7 @@
 package com.piisw.backend.service.ticket_purchase;
 
-import com.piisw.backend.controller.dto.TicketPurchaseRequest;
-import com.piisw.backend.controller.dto.TicketPurchaseResponse;
+import com.piisw.backend.controller.dto.ticket_purchase.TicketPurchaseRequest;
+import com.piisw.backend.controller.dto.ticket_purchase.TicketPurchaseResponse;
 import com.piisw.backend.entity.ticket.Ticket;
 import com.piisw.backend.entity.ticket.TicketPrice;
 import com.piisw.backend.entity.ticket.TicketType;

@@ -1,7 +1,7 @@
 package com.piisw.backend.controller.ticket;
 
 import com.piisw.backend.controller.BaseController;
-import com.piisw.backend.controller.dto.TicketResponse;
+import com.piisw.backend.controller.dto.ticket.TicketResponse;
 import com.piisw.backend.service.ticket.TicketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;

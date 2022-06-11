@@ -36,12 +36,13 @@ public class ShortTermTicketPurchase extends TicketPurchase {
     }
 
     @Override
-    public boolean isValid() {
-        if (dateTimeOfValidation == null) return true;
+    public TicketPurchaseStatus getTicketPurchaseStatus() {
+        if (dateTimeOfValidation == null) return TicketPurchaseStatus.INACTIVE;
 
         ShortTermTicket ticket = (ShortTermTicket) getTicket();
         LocalDateTime validityEndDateTime = dateTimeOfValidation.plusHours(ticket.getHours()).plusMinutes(ticket.getMinutes());
 
-        return !validityEndDateTime.isBefore(LocalDateTime.now());
+        if (!validityEndDateTime.isBefore(LocalDateTime.now())) return TicketPurchaseStatus.ACTIVE;
+        return TicketPurchaseStatus.INVALID;
     }
 }

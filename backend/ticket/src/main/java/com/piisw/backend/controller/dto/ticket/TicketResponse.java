@@ -1,4 +1,4 @@
-package com.piisw.backend.controller.dto;
+package com.piisw.backend.controller.dto.ticket;
 
 import com.piisw.backend.entity.ticket.TicketType;
 import io.swagger.v3.oas.annotations.media.Schema;

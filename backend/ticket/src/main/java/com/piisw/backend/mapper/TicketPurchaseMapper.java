@@ -1,7 +1,7 @@
 package com.piisw.backend.mapper;
 
 import com.piisw.backend.configuration.mapper.MapStructConfig;
-import com.piisw.backend.controller.dto.TicketPurchaseResponse;
+import com.piisw.backend.controller.dto.ticket_purchase.TicketPurchaseResponse;
 import com.piisw.backend.entity.ticket_purchase.LongTermTicketPurchase;
 import com.piisw.backend.entity.ticket_purchase.TicketPurchase;
 import org.mapstruct.Mapper;

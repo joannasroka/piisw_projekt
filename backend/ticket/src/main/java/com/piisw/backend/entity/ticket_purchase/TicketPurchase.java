@@ -37,5 +37,5 @@ public abstract class TicketPurchase extends BaseEntity {
 
     public abstract TicketType getTicketType();
 
-    public abstract boolean isValid();
+    public abstract TicketPurchaseStatus getTicketPurchaseStatus();
 }

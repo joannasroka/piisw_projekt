@@ -1,6 +1,6 @@
 package com.piisw.backend.service.ticket;
 
-import com.piisw.backend.controller.dto.TicketResponse;
+import com.piisw.backend.controller.dto.ticket.TicketResponse;
 import com.piisw.backend.entity.ticket.LongTermTicket;
 import com.piisw.backend.entity.ticket.ShortTermTicket;
 import com.piisw.backend.entity.ticket.SingleTicket;

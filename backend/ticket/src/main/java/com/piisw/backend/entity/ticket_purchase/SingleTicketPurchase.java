@@ -37,11 +37,12 @@ public class SingleTicketPurchase extends TicketPurchase {
     }
 
     @Override
-    public boolean isValid() {
-        if (dateTimeOfValidation == null) return true;
+    public TicketPurchaseStatus getTicketPurchaseStatus() {
+        if (dateTimeOfValidation == null) return TicketPurchaseStatus.INACTIVE;
 
         LocalDateTime validityEndDateTime = dateTimeOfValidation.plusHours(MAX_TRAVEL_TIME_IN_HOURS);
 
-        return !validityEndDateTime.isBefore(LocalDateTime.now());
+        if (!validityEndDateTime.isBefore(LocalDateTime.now())) return TicketPurchaseStatus.ACTIVE;
+        return TicketPurchaseStatus.INVALID;
     }
 }

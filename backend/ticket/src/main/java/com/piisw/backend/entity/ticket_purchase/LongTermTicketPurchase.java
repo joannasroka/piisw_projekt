@@ -36,10 +36,11 @@ public class LongTermTicketPurchase extends TicketPurchase {
     }
 
     @Override
-    public boolean isValid() {
+    public TicketPurchaseStatus getTicketPurchaseStatus() {
+        if (validityStartDateTime.isAfter(LocalDateTime.now())) return TicketPurchaseStatus.INACTIVE;
         LocalDateTime validityEndDateTime = validityStartDateTime.plusDays(((LongTermTicket) getTicket()).getDays());
-        return validityStartDateTime.isAfter(LocalDateTime.now())
-                || !validityEndDateTime.isBefore(LocalDateTime.now());
 
+        if (!validityEndDateTime.isBefore(LocalDateTime.now())) return TicketPurchaseStatus.ACTIVE;
+        return TicketPurchaseStatus.INVALID;
     }
 }

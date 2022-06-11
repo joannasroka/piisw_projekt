@@ -1,6 +1,8 @@
-package com.piisw.backend.controller.dto;
+package com.piisw.backend.controller.dto.ticket_purchase;
 
+import com.piisw.backend.controller.dto.ticket.TicketResponse;
 import com.piisw.backend.entity.ticket.TicketPrice;
+import com.piisw.backend.entity.ticket_purchase.TicketPurchaseStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +27,7 @@ public class TicketPurchaseResponse {
     private LocalDateTime dateOfPurchase;
 
     @Schema(required = true)
-    private boolean isValid;
+    private TicketPurchaseStatus ticketPurchaseStatus;
 
     private LocalDateTime dateTimeOfValidation;
 
