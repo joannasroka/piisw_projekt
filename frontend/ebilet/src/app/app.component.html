@@ -8,6 +8,7 @@
     <mat-nav-list>
       <a mat-list-item routerLinkActive="active-list-item" routerLink="browseTickets">Browse tickets</a>
       <a mat-list-item routerLinkActive="active-list-item" *ngIf="isUserRolePassenger()" routerLink="myTickets">My tickets</a>
+      <a mat-list-item routerLinkActive="active-list-item" *ngIf="isUserRoleInspector()" routerLink="inspectTickets">Inspect tickets</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

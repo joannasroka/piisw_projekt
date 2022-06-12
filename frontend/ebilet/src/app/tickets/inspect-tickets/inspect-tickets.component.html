@@ -1,0 +1,61 @@
+<app-loading-spinner [show]="loading"></app-loading-spinner>
+<mat-toolbar>
+  <div class="toolbarTitle">Inspect tickets</div>
+</mat-toolbar>
+<div class="contentContainer" ngClass.xs="small-mobilePadding">
+  <div fxFlex.xs="100%" fxFlex.sm="87.5%" fxFlex.md="75%" fxFlex.lg="62.5%" fxFlex.xl="50%">
+    <div class="searchControls">
+      <form [formGroup]="checkTicketForm" (ngSubmit)="checkTicket()">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1em">
+          <mat-form-field appearance="outline" fxFlex="60">
+            <mat-label>Verification code</mat-label>
+            <input matInput formControlName="verificationCode" trim="blur" cdkTrapFocus [cdkTrapFocusAutoCapture]="true">
+            <mat-error *ngIf="checkTicketForm.controls['verificationCode'].hasError('required')">
+              Enter verification code to inspect a ticket
+            </mat-error>
+          </mat-form-field>
+          <button type="submit" mat-flat-button color="primary" [disabled]="checkTicketForm.invalid" fxFlex>
+            <mat-icon>search</mat-icon>
+            Check ticket
+          </button>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="isTicketFound != undefined ? !isTicketFound : false" class="notFound">
+      <mat-icon [inline]="true">search_off</mat-icon>
+      Ticket for provided verification code not found
+    </div>
+    <div *ngIf="isTicketFound">
+      <mat-card [ngClass]="{'valid': hasVerificationPassed, 'checkForValidity': shouldAdditionalCheck(), 'invalid': !hasVerificationPassed}">
+        <div>
+          <mat-card-title *ngIf="hasVerificationPassed">
+            <div *ngIf="!shouldAdditionalCheck()" class="validityCardContent">
+              <mat-icon [inline]="true">check</mat-icon>
+              Ticket valid
+            </div>
+            <div *ngIf="shouldAdditionalCheck()" class="validityCardContent">
+              <mat-icon [inline]="true">question_mark</mat-icon>
+              Additional check
+              <span *ngIf="currentTicket?.price == TicketPricingType.REDUCED" class="discountText">
+              (discount)
+            </span>
+              <span *ngIf="currentTicket?.ticket?.ticketType == TicketType.SINGLE" class="discountText">
+              (single ticket)
+            </span>
+            </div>
+          </mat-card-title>
+          <mat-card-title *ngIf="!hasVerificationPassed" class="validityCardContent">
+            <mat-icon [inline]="true">close</mat-icon>
+            Ticket invalid
+          </mat-card-title>
+        </div>
+        <mat-card-content>
+          <div class="mat-h2">Validation details</div>
+          <app-details-table [detailsArray]="validationDetails"></app-details-table>
+          <div class="mat-h2">Ticket details</div>
+          <app-details-table [detailsArray]="purchasedTicketDetails"></app-details-table>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

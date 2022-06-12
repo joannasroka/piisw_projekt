@@ -21,6 +21,9 @@ import { MyTicketsComponent } from './my-tickets/my-tickets.component';
 import { PurchaseTicketRowComponent } from './purchase-ticket-row/purchase-ticket-row.component';
 import { MatExpansionModule } from "@angular/material/expansion";
 import { TimeagoModule } from "ngx-timeago";
+import { InspectTicketsComponent } from './inspect-tickets/inspect-tickets.component';
+import { NgxTrimDirectiveModule } from "ngx-trim-directive";
+import { A11yModule } from "@angular/cdk/a11y";
 
 
 @NgModule({
@@ -29,28 +32,31 @@ import { TimeagoModule } from "ngx-timeago";
     TicketRowComponent,
     BuyTicketComponent,
     MyTicketsComponent,
-    PurchaseTicketRowComponent
+    PurchaseTicketRowComponent,
+    InspectTicketsComponent
   ],
-    imports: [
-        CommonModule,
-        MatToolbarModule,
-        FlexLayoutModule,
-        MatButtonToggleModule,
-        FormsModule,
-        MatCardModule,
-        MatListModule,
-        MatIconModule,
-        MatButtonModule,
-        MatStepperModule,
-        SharedModule,
-        RouterModule,
-        MatDatepickerModule,
-        MatFormFieldModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatExpansionModule,
-        TimeagoModule
-    ],
+  imports: [
+    CommonModule,
+    MatToolbarModule,
+    FlexLayoutModule,
+    MatButtonToggleModule,
+    FormsModule,
+    MatCardModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
+    MatStepperModule,
+    SharedModule,
+    RouterModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatExpansionModule,
+    TimeagoModule,
+    NgxTrimDirectiveModule,
+    A11yModule
+  ],
   providers: [CurrencyPipe]
 })
 export class TicketsModule { }

@@ -14,6 +14,8 @@ import { BuyTicketResolver } from './tickets/resolvers/buy-ticket-resolver/buy-t
 import { MyTicketsComponent } from './tickets/my-tickets/my-tickets.component';
 import { MyTicketsResolver } from './tickets/resolvers/my-tickets-resolver/my-tickets.resolver';
 import { PassengerRoleGuard } from "./helpers/guards/passenger-role.guard";
+import { InspectTicketsComponent } from './tickets/inspect-tickets/inspect-tickets.component';
+import { InspectorRoleGuard } from './helpers/guards/inspector-role.guard';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent, canActivate: [NotAuthGuard]},
@@ -24,6 +26,7 @@ const routes: Routes = [
   { path: 'browseTickets', component: BrowseTicketsComponent, resolve: {tickets: TicketsResolver}, canActivate: [AuthGuard]},
   { path: 'buyTicket', component: BuyTicketComponent, resolve: {ticketToBuy: BuyTicketResolver}, canActivate: [AuthGuard, PassengerRoleGuard]},
   { path: 'myTickets', component: MyTicketsComponent, resolve: {myTickets: MyTicketsResolver}, canActivate: [AuthGuard, PassengerRoleGuard]},
+  { path: 'inspectTickets', component: InspectTicketsComponent, canActivate: [AuthGuard, InspectorRoleGuard]},
   // otherwise redirect to landing page
   { path: '**', redirectTo: 'landingPage'}
 ];

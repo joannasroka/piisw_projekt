@@ -1,0 +1,53 @@
+.searchControls{
+  button {
+    margin-bottom: 1.34375em;
+    padding: 0;
+  }
+}
+
+.notFound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+  mat-icon {
+    font-size: 50px;
+    line-height: 50px;
+  }
+}
+
+.validityCardContent{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+
+  mat-icon {
+    font-size: 50px;
+    line-height: 50px;
+  }
+}
+
+.valid {
+  background-color: #9ccc65;
+  color: black;
+}
+
+.checkForValidity {
+  background-color: #65a3cc;
+  color: white;
+}
+
+.invalid {
+  background-color: #bf5555;
+  color: white;
+}
+
+.mat-h2 {
+  margin: 0;
+}
+
+.discountText {
+  padding-left: 8px;
+}

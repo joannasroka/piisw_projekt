@@ -9,6 +9,11 @@
     width: 6em;
   }
 
+  .mat-table{
+    border-radius: 4px;
+    overflow:hidden !important;
+  }
+
   table tr td:first-child {
     border-right: 1px solid rgba(0,0,0,0.12);
   }

@@ -23,4 +23,8 @@ export class PurchaseTicketService {
   getPurchasedTickets(): Observable<PurchaseTicketResponse[]> {
     return this.http.get<PurchaseTicketResponse[]>(`${this.apiURL}`, {withCredentials: true});
   }
+
+  getPurchasedTicketForVerificationCode(verificationCode: string): Observable<PurchaseTicketResponse> {
+    return this.http.get<PurchaseTicketResponse>(`${this.apiURL}/${verificationCode}`, {withCredentials: true});
+  }
 }
