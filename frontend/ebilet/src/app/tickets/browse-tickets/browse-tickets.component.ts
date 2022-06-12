@@ -10,7 +10,7 @@ import { TicketType } from "../models/ticketType";
   styleUrls: ['./browse-tickets.component.scss']
 })
 export class BrowseTicketsComponent implements OnInit {
-  tickets: TicketResponse[];
+  tickets!: TicketResponse[];
   TicketPricingType = TicketPricingType;
   ticketPricingType: TicketPricingType;
 

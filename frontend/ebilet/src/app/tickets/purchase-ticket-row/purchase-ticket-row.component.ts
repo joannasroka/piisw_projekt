@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PurchaseTicketResponse } from "../models/response/purchaseTicketResponse";
 import { TicketPricingType } from "../models/ticketPricingType";
 import { PurchaseTicketStatus } from "../models/purchaseTicketStatus";
@@ -15,11 +15,13 @@ import { Observable } from "rxjs";
 })
 export class PurchaseTicketRowComponent implements OnInit {
   @Input() purchasedTicket!: PurchaseTicketResponse;
+  @Output() validateTicketEvent = new EventEmitter<PurchaseTicketResponse>();
   validationDetails: DetailData[] = [];
   purchasedTicketDetails: DetailData[] = [];
   pricingTypeString: string = "";
   pricingTypeShortString: string = "";
   TicketPricingType = TicketPricingType;
+  TicketType = TicketType;
 
   isHandset$: Observable<boolean>;
 
@@ -74,9 +76,14 @@ export class PurchaseTicketRowComponent implements OnInit {
     //for ACTIVE and INVALID tickets we display validity info (current or past)
     if (this.isActive() || this.isInvalid()) {
       switch (this.purchasedTicket.ticket.ticketType) {
-        case TicketType.SINGLE: case TicketType.SHORT_TERM: {
-          this.validationDetails.push({detailName: "Valid through:", detailData: this.getValidThroughLongDate()})
+        case TicketType.SINGLE: {
           this.validationDetails.push({detailName: "Date of validation:", detailData: this.getValidationDate()})
+          this.validationDetails.push({detailName: "Valid through:", detailData: "Until end of the line"})
+          break;
+        }
+        case TicketType.SHORT_TERM: {
+          this.validationDetails.push({detailName: "Date of validation:", detailData: this.getValidationDate()})
+          this.validationDetails.push({detailName: "Valid through:", detailData: this.getValidThroughLongDate()})
           break;
         }
         case TicketType.LONG_TERM: {
@@ -86,6 +93,10 @@ export class PurchaseTicketRowComponent implements OnInit {
         }
       }
     }
+  }
+
+  validateTicketClicked(): void {
+    this.validateTicketEvent.emit(this.purchasedTicket);
   }
 
   getValidationDate(): string {

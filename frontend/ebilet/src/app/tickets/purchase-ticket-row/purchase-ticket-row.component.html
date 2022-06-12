@@ -2,18 +2,30 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <div class="ticketName">{{purchasedTicket?.ticket.name}}</div>
+        <div class="ticketName">{{purchasedTicket!.ticket.name!}}</div>
         <span class="pricingTypeTitleLabel">({{(this.isHandset$ | async) ? this.pricingTypeShortString : this.pricingTypeString}})</span>
       </mat-panel-title>
       <mat-panel-description *ngIf="isActive() && purchasedTicket?.validityEndDateTime">
         Valid for: {{purchasedTicket?.validityEndDateTime | timeago:true | slice:0:-9}}
       </mat-panel-description>
+      <mat-panel-description *ngIf="isActive() && (purchasedTicket!.ticket.ticketType) == TicketType.SINGLE">
+        Valid for: Until end of the line
+      </mat-panel-description>
       <mat-panel-description *ngIf="isInactive() && purchasedTicket?.validityStartDateTime">
-        Valid from: {{getValidFromShortDate()}}
+        Valid from:  {{purchasedTicket.validityStartDateTime | date}}
+      </mat-panel-description>
+      <mat-panel-description *ngIf="isInvalid()">
+        Purchased on: {{purchasedTicket.dateOfPurchase | date: 'short'}}
       </mat-panel-description>
     </mat-expansion-panel-header>
     <h4>Validation details</h4>
     <app-details-table [detailsArray]="validationDetails"></app-details-table>
+    <div *ngIf="isInactive() && !purchasedTicket?.validityStartDateTime" class="formActionButtons validateTicketButton">
+    <button mat-stroked-button color="primary" fxFlex.xs fxFlex.sm (click)="validateTicketClicked()">
+      <mat-icon>confirmation_number</mat-icon>
+      Validate ticket
+    </button>
+    </div>
     <h4>Ticket details</h4>
     <app-details-table [detailsArray]="purchasedTicketDetails"></app-details-table>
   </mat-expansion-panel>

@@ -1,4 +1,4 @@
-export interface PassengerSingupRequest {
+export interface PassengerSignupRequest {
   email: string,
   firstName: string,
   lastName: string

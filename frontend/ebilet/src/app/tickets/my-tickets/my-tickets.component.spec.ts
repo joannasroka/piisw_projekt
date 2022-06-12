@@ -5,6 +5,13 @@ import { RouterTestingModule } from "@angular/router/testing";
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { SharedModule } from "../../shared/shared.module";
+import { HttpClientTestingModule } from "@angular/common/http/testing";
+import { TicketType } from "../models/ticketType";
+import { TicketPricingType } from "../models/ticketPricingType";
+import { PurchaseTicketStatus } from "../models/purchaseTicketStatus";
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('MyTicketsComponent', () => {
   let component: MyTicketsComponent;
@@ -17,7 +24,11 @@ describe('MyTicketsComponent', () => {
         RouterTestingModule,
         MatToolbarModule,
         MatButtonModule,
-        MatButtonToggleModule
+        MatButtonToggleModule,
+        SharedModule,
+        HttpClientTestingModule,
+        MatListModule,
+        MatIconModule
       ]
     })
     .compileComponents();
@@ -26,6 +37,21 @@ describe('MyTicketsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MyTicketsComponent);
     component = fixture.componentInstance;
+    component.myTickets = [
+      {
+        id: 1,
+        ticket: {
+          id: 1,
+          normalPrice: 1,
+          reducedPrice: 1,
+          name: "Test ticket",
+          ticketType: TicketType.SINGLE
+        },
+        price: TicketPricingType.REGULAR,
+        dateOfPurchase: new Date(),
+        ticketPurchaseStatus: PurchaseTicketStatus.ACTIVE,
+      }
+    ]
     fixture.detectChanges();
   });
 

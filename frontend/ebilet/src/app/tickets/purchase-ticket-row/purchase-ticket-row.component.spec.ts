@@ -5,6 +5,10 @@ import { CurrencyPipe } from "@angular/common";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { TicketPricingType } from "../models/ticketPricingType";
+import { PurchaseTicketStatus } from "../models/purchaseTicketStatus";
+import { TicketType } from "../models/ticketType";
+import { MatIconModule } from '@angular/material/icon';
 
 describe('PurchaseTicketRowComponent', () => {
   let component: PurchaseTicketRowComponent;
@@ -16,7 +20,8 @@ describe('PurchaseTicketRowComponent', () => {
       imports: [
         MatExpansionModule,
         SharedModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        MatIconModule
       ],
       providers: [
         CurrencyPipe,
@@ -28,6 +33,19 @@ describe('PurchaseTicketRowComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PurchaseTicketRowComponent);
     component = fixture.componentInstance;
+    component.purchasedTicket = {
+      id: 1,
+      ticket: {
+        id: 1,
+        normalPrice: 1,
+        reducedPrice: 1,
+        name: "Test ticket",
+        ticketType: TicketType.SINGLE
+      },
+      price: TicketPricingType.REGULAR,
+      dateOfPurchase: new Date(),
+      ticketPurchaseStatus: PurchaseTicketStatus.INACTIVE,
+    }
     fixture.detectChanges();
   });
 

@@ -1,6 +1,6 @@
 import { AfterContentChecked, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { PassengerSingupRequest } from "../models/request/passengerSingupRequest";
+import { PassengerSignupRequest } from "../models/request/passengerSignupRequest";
 import { ActivatedRoute, Router } from "@angular/router";
 import { SnackbarService } from "../../shared/snackbar/snackbar-service/snackbar.service";
 import { AuthenticationService } from "../../authentication/services/authentication-service/authentication.service";
@@ -16,7 +16,7 @@ import { checkEmailMismatch, CrossFieldErrorMatcher } from "../../helpers/formCo
 })
 export class SignupComponent implements OnInit, AfterContentChecked {
   signupForm: FormGroup;
-  passengerSignupRequest: PassengerSingupRequest | undefined;
+  passengerSignupRequest: PassengerSignupRequest | undefined;
   errorMatcher = new CrossFieldErrorMatcher("emailMismatch");
   loading = false;
 

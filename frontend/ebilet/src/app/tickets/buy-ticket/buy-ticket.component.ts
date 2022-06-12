@@ -136,7 +136,6 @@ export class BuyTicketComponent implements OnInit {
     this.purchaseTicketService.purchaseTicket(purchaseTicketRequest)
       .subscribe({
         next: (purchaseTicketResponse) => {
-          console.log(purchaseTicketResponse);
           this.purchasedTicketValidationCode = purchaseTicketResponse.id.toString();
           this.snackbarService.openSuccessSnackbar("You've successfully purchased a ticket!");
           this.isPurchaseCompleted = true;
