@@ -6,6 +6,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { FormsModule } from '@angular/forms';
+import { HttpClientTestingModule } from "@angular/common/http/testing";
 
 describe('BrowseTicketsComponent', () => {
   let component: BrowseTicketsComponent;
@@ -19,6 +20,7 @@ describe('BrowseTicketsComponent', () => {
         MatButtonModule,
         MatButtonToggleModule,
         FormsModule,
+        HttpClientTestingModule
       ],
       declarations: [ BrowseTicketsComponent ]
     })

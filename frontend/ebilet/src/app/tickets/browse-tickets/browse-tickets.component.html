@@ -9,17 +9,17 @@
     </mat-button-toggle-group>
     <div class="mat-h2">Single tickets</div>
     <mat-list *ngFor="let ticket of getSingeTickets()">
-      <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType" (buyTicketEvent)="buyTicketClicked($event)"></app-ticket-row>
+      <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType" (buyTicketEvent)="buyTicketClicked($event)" [shouldDisplayBuyButton]="this.authenticationService.isUserRolePassenger()"></app-ticket-row>
     </mat-list>
     <div class="categorySpacer"></div>
     <div class="mat-h2">Short-term tickets</div>
     <mat-list *ngFor="let ticket of getShortTermTickets()">
-      <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType" (buyTicketEvent)="buyTicketClicked($event)"></app-ticket-row>
+      <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType" (buyTicketEvent)="buyTicketClicked($event)" [shouldDisplayBuyButton]="this.authenticationService.isUserRolePassenger()"></app-ticket-row>
     </mat-list>
     <div class="categorySpacer"></div>
     <div class="mat-h2">Long-term tickets</div>
     <mat-list *ngFor="let ticket of getLongTermTickets()">
-      <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType" (buyTicketEvent)="buyTicketClicked($event)"></app-ticket-row>
+      <app-ticket-row [ticket]="ticket" [ticketPricingType]="ticketPricingType" (buyTicketEvent)="buyTicketClicked($event)" [shouldDisplayBuyButton]="this.authenticationService.isUserRolePassenger()"></app-ticket-row>
     </mat-list>
   </div>
 </div>

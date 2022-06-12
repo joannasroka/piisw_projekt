@@ -13,6 +13,7 @@ import { BuyTicketComponent } from './tickets/buy-ticket/buy-ticket.component';
 import { BuyTicketResolver } from './tickets/resolvers/buy-ticket-resolver/buy-ticket.resolver';
 import { MyTicketsComponent } from './tickets/my-tickets/my-tickets.component';
 import { MyTicketsResolver } from './tickets/resolvers/my-tickets-resolver/my-tickets.resolver';
+import { PassengerRoleGuard } from "./helpers/guards/passenger-role.guard";
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent, canActivate: [NotAuthGuard]},
@@ -21,8 +22,8 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent, canActivate: [NotAuthGuard]},
   { path: 'confirmSignup', component: ConfirmSignupComponent, canActivate: [TokenGuard, NotAuthGuard]},
   { path: 'browseTickets', component: BrowseTicketsComponent, resolve: {tickets: TicketsResolver}, canActivate: [AuthGuard]},
-  { path: 'buyTicket', component: BuyTicketComponent, resolve: {ticketToBuy: BuyTicketResolver}, canActivate: [AuthGuard]},
-  { path: 'myTickets', component: MyTicketsComponent, resolve: {myTickets: MyTicketsResolver}, canActivate: [AuthGuard]},
+  { path: 'buyTicket', component: BuyTicketComponent, resolve: {ticketToBuy: BuyTicketResolver}, canActivate: [AuthGuard, PassengerRoleGuard]},
+  { path: 'myTickets', component: MyTicketsComponent, resolve: {myTickets: MyTicketsResolver}, canActivate: [AuthGuard, PassengerRoleGuard]},
   // otherwise redirect to landing page
   { path: '**', redirectTo: 'landingPage'}
 ];

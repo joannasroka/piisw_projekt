@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, switchMap } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { environment } from "../../../../environments/environment";
+import { UserRole } from "../../models/userRole";
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,14 @@ export class AuthenticationService {
     if (savedUserAuth) {
       this.userAuthSubject.next(JSON.parse(savedUserAuth))
     }
+  }
+
+  isUserRolePassenger(): boolean {
+    return this.userAuthValue().role === UserRole.PASSENGER;
+  }
+
+  isUserRoleInspector(): boolean {
+    return this.userAuthValue().role === UserRole.INSPECTOR;
   }
 
   login(username: string, password: string): Observable<UserAuth> {

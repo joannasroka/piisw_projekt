@@ -9,7 +9,8 @@ import { TicketPricingType } from "../models/ticketPricingType";
 })
 export class TicketRowComponent implements OnInit {
   @Input() ticket!: TicketResponse;
-  @Input() ticketPricingType!: TicketPricingType ;
+  @Input() ticketPricingType!: TicketPricingType;
+  @Input() shouldDisplayBuyButton: boolean = true;
   @Output() buyTicketEvent = new EventEmitter<TicketResponse>();
 
   TicketPricingType = TicketPricingType;

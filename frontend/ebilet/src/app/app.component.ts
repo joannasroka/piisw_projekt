@@ -28,11 +28,11 @@ export class AppComponent {
     this.authenticationService.readStoredUserAuth();
   }
 
-  get isUserRolePassenger(): boolean {
+  isUserRolePassenger(): boolean {
     return this.userAuth ? this.userAuth.role === UserRole.PASSENGER : false;
   }
 
-  get isUserRoleInspector(): boolean {
+  isUserRoleInspector(): boolean {
     return this.userAuth ? this.userAuth.role === UserRole.INSPECTOR : false;
   }
 

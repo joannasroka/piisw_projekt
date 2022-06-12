@@ -3,6 +3,7 @@ import { TicketResponse } from "../models/response/ticketResponse";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TicketPricingType } from "../models/ticketPricingType";
 import { TicketType } from "../models/ticketType";
+import { AuthenticationService } from "../../authentication/services/authentication-service/authentication.service";
 
 @Component({
   selector: 'app-browse-tickets',
@@ -15,6 +16,7 @@ export class BrowseTicketsComponent implements OnInit {
   ticketPricingType: TicketPricingType;
 
   constructor(private activatedRoute: ActivatedRoute,
+              public authenticationService: AuthenticationService,
               private router: Router) {
    this.tickets = this.activatedRoute.snapshot.data['tickets'];
    this.ticketPricingType = TicketPricingType.REGULAR;
