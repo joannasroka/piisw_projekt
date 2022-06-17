@@ -7,18 +7,22 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public interface TicketPurchaseRepository extends JpaRepository<TicketPurchase, Long> {
 
     List<TicketPurchase> findAllByPassenger(Passenger passenger);
 
-    Optional<TicketPurchase> getByIdAndPassenger(Long id, Passenger passenger);
+    Optional<TicketPurchase> getByGlobalIdAndPassenger(UUID globalId, Passenger passenger);
 
-    default TicketPurchase findByIdAndPassenger(Long id, Passenger passenger) {
-        return getByIdAndPassenger(id, passenger).orElseThrow(DatabaseEntityNotFoundException::new);
+    default TicketPurchase findByGlobalIdAndPassenger(UUID globalId, Passenger passenger) {
+        return getByGlobalIdAndPassenger(globalId, passenger)
+                .orElseThrow(DatabaseEntityNotFoundException::new);
     }
 
-    default TicketPurchase getById(Long id) {
-        return findById(id).orElseThrow(DatabaseEntityNotFoundException::new);
+    Optional<TicketPurchase> getByGlobalId(UUID globalId);
+
+    default TicketPurchase findByGlobalById(UUID globalId) {
+        return getByGlobalId(globalId).orElseThrow(DatabaseEntityNotFoundException::new);
     }
 }

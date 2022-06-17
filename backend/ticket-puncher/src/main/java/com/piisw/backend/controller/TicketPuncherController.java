@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 import static com.piisw.backend.security.AuthorizationConstants.HAS_ROLE_PASSENGER;
 
 @RestController
@@ -21,8 +23,8 @@ public class TicketPuncherController extends BaseController {
 
     @PreAuthorize(HAS_ROLE_PASSENGER)
     @PutMapping("/punch")
-    public TicketPurchaseResponse punchTicket(@RequestParam Long ticketPurchaseId) {
+    public TicketPurchaseResponse punchTicket(@RequestParam UUID ticketPurchaseGlobalId) {
         Long currentPassengerId = authenticationContextService.getCurrentUserId();
-        return ticketPuncherService.punchPurchasedTicket(ticketPurchaseId, currentPassengerId);
+        return ticketPuncherService.punchPurchasedTicket(ticketPurchaseGlobalId, currentPassengerId);
     }
 }

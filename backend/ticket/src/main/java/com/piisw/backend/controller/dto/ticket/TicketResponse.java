@@ -7,13 +7,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class TicketResponse {
     @Schema(required = true)
-    private Long id;
+    private UUID globalId;
 
     @Schema(required = true)
     private BigDecimal normalPrice;

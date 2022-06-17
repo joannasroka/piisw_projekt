@@ -17,6 +17,6 @@ public class UserService {
 
     public UserResponse getById(Long id) {
         User user = userRepository.getById(id);
-        return new UserResponse(user.getId(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getAccountStatus(), user.getRole());
+        return new UserResponse(user.getGlobalId(), user.getEmail(), user.getFirstName(), user.getLastName(), user.getAccountStatus(), user.getRole());
     }
 }

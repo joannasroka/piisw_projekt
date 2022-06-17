@@ -1,9 +1,11 @@
 package com.piisw.backend.entity;
 
 import lombok.Getter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.UUID;
 
 @MappedSuperclass
 @Getter
@@ -17,6 +19,10 @@ public class BaseEntity {
     @Version
     @Column(name = "version")
     private Long version;
+
+    @Type(type = "uuid-char")
+    @Column(name = "global_id", updatable = false, nullable = false, columnDefinition = "VARCHAR(36)")
+    private UUID globalId = UUID.randomUUID();
 
     @Override
     public boolean equals(Object o) {

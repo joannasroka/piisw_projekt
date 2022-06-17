@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +16,7 @@ import java.time.LocalDate;
 public class TicketPurchaseRequest {
     @NotNull(message = "error.cannotBeBlank")
     @Schema(required = true)
-    private Long ticketId;
+    private UUID globalId;
 
     @NotNull(message = "error.cannotBeBlank")
     @Schema(required = true)
