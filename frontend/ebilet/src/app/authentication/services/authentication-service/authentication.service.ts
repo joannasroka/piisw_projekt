@@ -12,6 +12,7 @@ import { UserRole } from "../../models/userRole";
 export class AuthenticationService {
   private userAuthSubject: BehaviorSubject<UserAuth | any>;
   public userAuthObservable: Observable<UserAuth | any>;
+  readonly STORAGE_KEY = 'userAuth';
 
   constructor(
     private http: HttpClient,
@@ -25,7 +26,7 @@ export class AuthenticationService {
   }
 
   readStoredUserAuth(): void {
-    const savedUserAuth = sessionStorage.getItem('userAuth')
+    const savedUserAuth = sessionStorage.getItem(this.STORAGE_KEY)
     if (savedUserAuth) {
       this.userAuthSubject.next(JSON.parse(savedUserAuth))
     }
@@ -41,19 +42,22 @@ export class AuthenticationService {
 
   login(username: string, password: string): Observable<UserAuth> {
     let body = new HttpParams({fromObject: {username, password}});
-    console.log(body.toString());
     return this.http.post<any>(`${environment.apiUrl}/login`, body.toString(),
       {headers: {'Content-Type': 'application/x-www-form-urlencoded'}, withCredentials: true})
       .pipe(
         switchMap(() => {
-          return this.http.get<UserAuth>(`${environment.apiUrl}/api/users/@me`, {withCredentials: true})
-            .pipe(map(user => {
-              this.userAuthSubject.next(user);
-              sessionStorage.setItem('userAuth', JSON.stringify(user))
-              return user;
-            }));
+          return this.getUserAuthData()
         })
       );
+  }
+
+  private getUserAuthData() : Observable<UserAuth> {
+    return this.http.get<UserAuth>(`${environment.apiUrl}/api/users/@me`, {withCredentials: true})
+      .pipe(map(user => {
+        this.userAuthSubject.next(user);
+        sessionStorage.setItem(this.STORAGE_KEY, JSON.stringify(user))
+        return user;
+      }));
   }
 
   logout(): Observable<any> {

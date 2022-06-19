@@ -10,7 +10,7 @@ import { PassengerSignupRequest } from "../../models/request/passengerSignupRequ
 })
 export class PassengerService {
 
-  private readonly apiURL = `${environment.apiUrl}/api/passengers`;
+  readonly apiURL = `${environment.apiUrl}/api/passengers`;
 
   constructor(
     private http: HttpClient

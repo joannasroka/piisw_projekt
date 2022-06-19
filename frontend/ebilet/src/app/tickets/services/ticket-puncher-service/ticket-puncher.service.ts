@@ -9,7 +9,7 @@ import { PurchaseTicketResponse } from '../../models/response/purchaseTicketResp
 })
 export class TicketPuncherService {
 
-  private readonly apiURL = `${environment.apiUrl}/api/ticket-punchers`;
+  readonly apiURL = `${environment.apiUrl}/api/ticket-punchers`;
 
   constructor(
     private http: HttpClient

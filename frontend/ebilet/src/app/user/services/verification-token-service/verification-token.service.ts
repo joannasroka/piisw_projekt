@@ -10,7 +10,7 @@ import { VerifyTokenRequest } from "../../models/request/verifyTokenRequest";
 })
 export class VerificationTokenService {
 
-  private readonly apiURL = `${environment.apiUrl}/api/tokens`;
+  readonly apiURL = `${environment.apiUrl}/api/tokens`;
 
   constructor(
     private http: HttpClient

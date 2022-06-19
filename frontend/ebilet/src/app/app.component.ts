@@ -42,11 +42,11 @@ export class AppComponent {
       .subscribe({
         next: () => {
           this.loading = false;
-          this.router.navigate(['/']).then(() => this.snackbarService.openSuccessSnackbar('Logged out'));
+          this.router.navigate(['/']).then(() => this.snackbarService.openSuccessSnackbar('Logged out successfully!'));
         },
         error: () => {
           this.loading = false;
-          this.router.navigate(['/']).then(() => this.snackbarService.openErrorSnackbar('Logout error'));
+          this.router.navigate(['/']).then(() => this.snackbarService.openErrorSnackbar('Logout error!'));
         }
       });
   }

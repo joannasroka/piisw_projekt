@@ -9,7 +9,7 @@ import { TicketResponse } from "../../models/response/ticketResponse";
 })
 export class TicketService {
 
-  private readonly apiURL = `${environment.apiUrl}/api/tickets`;
+  readonly apiURL = `${environment.apiUrl}/api/tickets`;
 
   constructor(
     private http: HttpClient

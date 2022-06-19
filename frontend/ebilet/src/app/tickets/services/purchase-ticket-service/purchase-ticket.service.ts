@@ -10,7 +10,7 @@ import { PurchaseTicketResponse } from "../../models/response/purchaseTicketResp
 })
 export class PurchaseTicketService {
 
-  private readonly apiURL = `${environment.apiUrl}/api/purchase-tickets`;
+  readonly apiURL = `${environment.apiUrl}/api/purchase-tickets`;
 
   constructor(
     private http: HttpClient
