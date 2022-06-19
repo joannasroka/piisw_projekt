@@ -70,7 +70,7 @@ export class PurchaseTicketRowComponent implements OnInit {
     ]
 
     this.validationDetails = [
-      {detailName: "Verification code", detailData: this.purchasedTicket?.id.toString()},
+      {detailName: "Verification code", detailData: this.purchasedTicket?.globalId.toString()},
     ]
 
     //for ACTIVE and INVALID tickets we display validity info (current or past)

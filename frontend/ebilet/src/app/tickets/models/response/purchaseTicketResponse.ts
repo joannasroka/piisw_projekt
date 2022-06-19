@@ -3,7 +3,7 @@ import { TicketPricingType } from "../ticketPricingType";
 import { PurchaseTicketStatus } from "../purchaseTicketStatus";
 
 export interface PurchaseTicketResponse {
-  id: number,
+  globalId: string,
   ticket: TicketResponse,
   price: TicketPricingType,
   dateOfPurchase: Date,

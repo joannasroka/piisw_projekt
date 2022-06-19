@@ -38,7 +38,7 @@ export class BrowseTicketsComponent implements OnInit {
   }
 
   buyTicketClicked(ticket: TicketResponse): void {
-    this.router.navigate(["/buyTicket"],{queryParams: {ticketId: ticket.id, pricingType: this.ticketPricingType}});
+    this.router.navigate(["/buyTicket"],{queryParams: {ticketId: ticket.globalId, pricingType: this.ticketPricingType}});
   }
 
 }

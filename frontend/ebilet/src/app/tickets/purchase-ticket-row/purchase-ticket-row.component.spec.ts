@@ -34,9 +34,9 @@ describe('PurchaseTicketRowComponent', () => {
     fixture = TestBed.createComponent(PurchaseTicketRowComponent);
     component = fixture.componentInstance;
     component.purchasedTicket = {
-      id: 1,
+      globalId: "1",
       ticket: {
-        id: 1,
+        globalId: "1",
         normalPrice: 1,
         reducedPrice: 1,
         name: "Test ticket",

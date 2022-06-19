@@ -119,7 +119,7 @@ describe('AuthenticationService', () => {
     it('should call login endpoint', () => {
       service.login('test','test').subscribe();
 
-      const loginRequest = httpMock.match(`${environment.apiUrl}/login`);
+      const loginRequest = httpMock.match(`${environment.apiUrl}/api/login`);
       expect(loginRequest.length).toBe(1);
       expect(loginRequest[0].request.method).toBe("POST");
       loginRequest[0].flush(null);
@@ -131,7 +131,7 @@ describe('AuthenticationService', () => {
     it('should call /api/users/@me endpoint', () => {
       service.login('test','test').subscribe();
 
-      const loginRequest = httpMock.match(`${environment.apiUrl}/login`);
+      const loginRequest = httpMock.match(`${environment.apiUrl}/api/login`);
       loginRequest[0].flush(null);
 
       const getUserAuthRequest = httpMock.match(`${environment.apiUrl}/api/users/@me`);
@@ -143,7 +143,7 @@ describe('AuthenticationService', () => {
     it('should save received user data to UserAuth and SessionStorage', () => {
       service.login('test','test').subscribe();
 
-      const loginRequest = httpMock.match(`${environment.apiUrl}/login`);
+      const loginRequest = httpMock.match(`${environment.apiUrl}/api/login`);
       loginRequest[0].flush(null);
 
       const getUserAuthRequest = httpMock.match(`${environment.apiUrl}/api/users/@me`);
@@ -158,7 +158,7 @@ describe('AuthenticationService', () => {
     it('should call logout endpoint', () => {
       service.logout().subscribe();
 
-      const logoutRequest = httpMock.expectOne(`${environment.apiUrl}/logout`);
+      const logoutRequest = httpMock.expectOne(`${environment.apiUrl}/api/logout`);
       expect(logoutRequest.request.method).toBe("POST");
       logoutRequest.flush(null);
     });
@@ -166,7 +166,7 @@ describe('AuthenticationService', () => {
     it('should remove user data from UserAuth and SessionStorage', () => {
       service.logout().subscribe();
 
-      const logoutRequest = httpMock.expectOne(`${environment.apiUrl}/logout`);
+      const logoutRequest = httpMock.expectOne(`${environment.apiUrl}/api/logout`);
       logoutRequest.flush(null);
 
       expect(service.userAuthValue()).toBeFalsy();

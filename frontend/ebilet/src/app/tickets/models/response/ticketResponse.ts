@@ -1,7 +1,7 @@
 import { TicketType } from "../ticketType";
 
 export interface TicketResponse {
-  id: number,
+  globalId: string,
   normalPrice: number,
   reducedPrice: number,
   name: string,

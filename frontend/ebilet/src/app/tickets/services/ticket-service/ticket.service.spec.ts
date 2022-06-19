@@ -9,7 +9,7 @@ describe('TicketService', () => {
   let service: TicketService;
   let httpMock: HttpTestingController;
   let testTicketResponse: TicketResponse = {
-    id: 0,
+    globalId: "1",
       normalPrice: 1,
       reducedPrice: 0.5,
       name: "Test ticket",

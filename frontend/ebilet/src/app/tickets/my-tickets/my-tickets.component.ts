@@ -97,12 +97,12 @@ export class MyTicketsComponent implements OnInit {
       `You're about to validate ${ticketToValidate.ticket.name} (${pricingTypeString}).`)
       .beforeClosed().subscribe(result => {
       if (result) {
-        this.validateTicket(ticketToValidate.id);
+        this.validateTicket(ticketToValidate.globalId);
       }
     });
   }
 
-  validateTicket(ticketId: number): void {
+  validateTicket(ticketId: string): void {
     this.loading = true;
 
     this.ticketPuncherService.validateTicket(ticketId)

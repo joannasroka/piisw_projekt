@@ -125,7 +125,7 @@ export class BuyTicketComponent implements OnInit {
     this.loading = true;
 
     let purchaseTicketRequest: PurchaseTicketRequest = {
-      ticketId: this.ticketToBuy.id,
+      ticketId: this.ticketToBuy.globalId,
       ticketPrice: this.pricingType,
     }
 
@@ -136,7 +136,7 @@ export class BuyTicketComponent implements OnInit {
     this.purchaseTicketService.purchaseTicket(purchaseTicketRequest)
       .subscribe({
         next: (purchaseTicketResponse) => {
-          this.purchasedTicketValidationCode = purchaseTicketResponse.id.toString();
+          this.purchasedTicketValidationCode = purchaseTicketResponse.globalId.toString();
           this.snackbarService.openSuccessSnackbar("You've successfully purchased a ticket!");
           this.isPurchaseCompleted = true;
           this.loading = false;

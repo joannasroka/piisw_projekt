@@ -42,7 +42,6 @@ export class AuthenticationService {
 
   login(username: string, password: string): Observable<UserAuth> {
     let body = new HttpParams({fromObject: {username, password}});
-    console.log(body.toString());
     return this.http.post<any>(`${environment.apiUrl}/api/login`, body.toString(),
       {headers: {'Content-Type': 'application/x-www-form-urlencoded'}, withCredentials: true})
       .pipe(

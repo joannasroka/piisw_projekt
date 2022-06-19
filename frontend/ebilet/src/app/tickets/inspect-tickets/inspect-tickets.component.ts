@@ -126,7 +126,7 @@ export class InspectTicketsComponent implements OnInit {
     ]
 
     this.validationDetails = [
-      {detailName: "Verification code", detailData: this.currentTicket!.id.toString()},
+      {detailName: "Verification code", detailData: this.currentTicket!.globalId.toString()},
       {detailName: "Ticket status", detailData: ticketStatusString}
     ]
 

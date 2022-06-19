@@ -1,7 +1,7 @@
 import { TicketPricingType } from "../ticketPricingType";
 
 export interface PurchaseTicketRequest {
-  ticketId: number,
+  ticketId: string,
   ticketPrice: TicketPricingType,
   validityStartDate?: string
 }

@@ -12,10 +12,10 @@ describe('TicketPuncherService', () => {
   let httpMock: HttpTestingController;
   let testPurchaseTicketResponse: PurchaseTicketResponse = {
     dateOfPurchase: new Date(),
-    id: 0,
+    globalId: "1",
     price: TicketPricingType.REGULAR,
     ticket: {
-      id: 0,
+      globalId: "1",
       normalPrice: 1,
       reducedPrice: 0.5,
       name: "Test ticket",
@@ -42,7 +42,7 @@ describe('TicketPuncherService', () => {
 
   describe('validateTicket()', () => {
     it('should call /punch endpoint using PUT', () => {
-      service.validateTicket(1).subscribe();
+      service.validateTicket("1").subscribe();
 
       const httpRequest = httpMock.expectOne(`${service.apiURL}/punch?ticketPurchaseId=1`);
       expect(httpRequest.request.method).toBe("PUT");
