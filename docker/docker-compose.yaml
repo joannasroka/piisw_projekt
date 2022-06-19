@@ -4,10 +4,11 @@ services:
   backend:
     image: application:0.0.1-SNAPSHOT
     ports:
-      - "8080:8080"
+      - "8085:8085"
     links:
       - mariadb
       - mailhog
+      - keycloak
     environment:
       SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/city_ticket?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
@@ -29,6 +30,51 @@ services:
       - "8025:8025"
     expose:
       - 1025
+  keycloak:
+    image: jboss/keycloak:16.1.1
+    restart: on-failure
+    command:
+      - "-b"
+      - "0.0.0.0"
+      - "-Dkeycloak.migration.action=import"
+      - "-Dkeycloak.migration.provider=dir"
+      - "-Dkeycloak.migration.dir=/config/"
+      - "-Dkeycloak.migration.strategy=IGNORE_EXISTING"
+    volumes:
+      - ./config:/config/
+    environment:
+#      - JAVA_OPTS="-Djboss.socket.binding.port-offset=10 -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m
+#          -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true"
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=password
+      - DB_VENDOR=postgres
+      - DB_USER=admin
+      - DB_PASSWORD=password
+      - DB_ADDR=keycloak-db
+      - DB_PORT=5432
+      - DB_DATABASE=keycloakdb
+    ports:
+      - "8080:8080"
+    depends_on:
+      - keycloak-db
+    expose:
+      - 8080
+    links:
+      - keycloak-db
+    networks:
+      keycloak-network:
+        aliases:
+          - sso.tickets.local
+
+  keycloak-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: keycloakdb
+    expose:
+      - 5432
+
   nginx:
     build:
       context: ../
@@ -37,3 +83,10 @@ services:
       - "80:80"
     links:
       - backend
+    networks:
+      keycloak-network:
+        aliases:
+          - city-ticket.local
+
+networks:
+  keycloak-network:

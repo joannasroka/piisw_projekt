@@ -45,6 +45,8 @@ dependencies {
     implementation "org.modelmapper:modelmapper:$modelMapperVersion"
     implementation "com.github.javafaker:javafaker:$javaFakerVersion"
     implementation 'org.mapstruct:mapstruct:1.5.0.RC1'
+    implementation 'org.keycloak:keycloak-spring-boot-starter:18.0.1'
+    implementation 'org.keycloak.bom:keycloak-adapter-bom:18.0.1'
     implementation(project(':common'))
     implementation(project(':user'))
     implementation(project(':ticket'))
