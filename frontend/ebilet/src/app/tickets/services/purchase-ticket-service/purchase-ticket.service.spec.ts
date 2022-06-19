@@ -12,7 +12,7 @@ describe('PurchaseTicketService', () => {
   let service: PurchaseTicketService;
   let httpMock: HttpTestingController;
   let testPurchaseTicketRequest: PurchaseTicketRequest = {
-    ticketId: "1",
+    globalId: "1",
     ticketPrice: TicketPricingType.REGULAR
   }
 

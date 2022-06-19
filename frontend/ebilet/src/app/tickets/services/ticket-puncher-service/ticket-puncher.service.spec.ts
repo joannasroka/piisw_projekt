@@ -44,7 +44,7 @@ describe('TicketPuncherService', () => {
     it('should call /punch endpoint using PUT', () => {
       service.validateTicket("1").subscribe();
 
-      const httpRequest = httpMock.expectOne(`${service.apiURL}/punch?ticketPurchaseId=1`);
+      const httpRequest = httpMock.expectOne(`${service.apiURL}/punch?ticketPurchaseGlobalId=1`);
       expect(httpRequest.request.method).toBe("PUT");
       httpRequest.flush(testPurchaseTicketResponse);
     });
