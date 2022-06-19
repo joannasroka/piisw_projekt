@@ -89,7 +89,6 @@ export class BuyTicketComponent implements OnInit {
     ]
   }
 
-  //TODO: Fix date input field locale to current browser locale
   getValidThroughDate(): string {
     const validThroughDate = new Date(this.dateFormControl.value);
     validThroughDate.setDate(validThroughDate.getDate() + this.ticketToBuy.days!);
@@ -125,7 +124,7 @@ export class BuyTicketComponent implements OnInit {
     this.loading = true;
 
     let purchaseTicketRequest: PurchaseTicketRequest = {
-      ticketId: this.ticketToBuy.globalId,
+      globalId: this.ticketToBuy.globalId,
       ticketPrice: this.pricingType,
     }
 

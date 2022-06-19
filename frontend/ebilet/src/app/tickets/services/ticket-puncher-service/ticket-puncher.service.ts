@@ -15,7 +15,7 @@ export class TicketPuncherService {
     private http: HttpClient
   ) { }
 
-  validateTicket(ticketPurchaseId: string): Observable<PurchaseTicketResponse> {
-    return this.http.put<PurchaseTicketResponse>(`${this.apiURL}/punch`,{},{withCredentials: true, params: {ticketPurchaseId}});
+  validateTicket(ticketPurchaseGlobalId: string): Observable<PurchaseTicketResponse> {
+    return this.http.put<PurchaseTicketResponse>(`${this.apiURL}/punch`,{},{withCredentials: true, params: {ticketPurchaseGlobalId}});
   }
 }

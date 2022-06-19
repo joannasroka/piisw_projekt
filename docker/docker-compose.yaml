@@ -17,6 +17,7 @@ services:
       SPRING_MAIL_USERNAME: city-ticket@mail.com
       SPRING_MAIL_PASSWORD: x
       CONFIGURATION_SECURITY_ACCOUNTACTIVATIONURL: http://localhost/confirmSignup?token=
+      TZ: Poland
   mariadb:
     image: mariadb
     expose:
