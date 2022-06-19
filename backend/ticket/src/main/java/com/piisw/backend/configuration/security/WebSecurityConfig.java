@@ -28,7 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/api/translations/**",
             "/h2-console/**",
             "/api/tokens/**",
-            "/api/passengers"
+            "/api/passengers",
+            "/api/login"
     };
 
     private static final String[] SWAGGER_AUTHENTICATION_WHITELIST = {
@@ -75,10 +76,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .formLogin()
+                .loginPage("/api/login")
                 .failureHandler(customAuthenticationFailureHandler)
                 .successHandler(customAuthenticationSuccessHandler)
                 .and()
                 .logout()
+                .logoutUrl("/api/logout")
                 .deleteCookies("JSESSIONID")
                 .logoutSuccessHandler(httpStatusReturningLogoutSuccessHandler())
                 .and()

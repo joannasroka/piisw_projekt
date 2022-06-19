@@ -29,7 +29,7 @@ public class PassengerService {
 
         accountActivationService.sendActivationMail(passenger);
 
-        return new PassengerResponse(passenger.getId(), passenger.getEmail(), passenger.getFirstName(), passenger.getLastName());
+        return new PassengerResponse(passenger.getGlobalId(), passenger.getEmail(), passenger.getFirstName(), passenger.getLastName());
     }
 
 

@@ -16,14 +16,14 @@ import static org.springframework.http.MediaType.APPLICATION_FORM_URLENCODED_VAL
 @RequiredArgsConstructor
 public class AuthController {
 
-    @PostMapping(value = "/login", consumes = APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/api/login", consumes = APPLICATION_FORM_URLENCODED_VALUE)
     @Operation(description = "Login")
     private void login(@Parameter(name = "username", required = true) @RequestBody String username,
                        @Parameter(name = "password", required = true) @RequestBody String password) {
         throw new IllegalStateException("Add Spring Security to handle authentication");
     }
 
-    @PostMapping(value = "/logout")
+    @PostMapping(value = "/api/logout")
     @Operation(description = "Logout")
     private void logout() {
         throw new IllegalStateException("Add Spring Security to handle authentication");

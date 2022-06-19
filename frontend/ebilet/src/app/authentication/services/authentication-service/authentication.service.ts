@@ -42,7 +42,8 @@ export class AuthenticationService {
 
   login(username: string, password: string): Observable<UserAuth> {
     let body = new HttpParams({fromObject: {username, password}});
-    return this.http.post<any>(`${environment.apiUrl}/login`, body.toString(),
+    console.log(body.toString());
+    return this.http.post<any>(`${environment.apiUrl}/api/login`, body.toString(),
       {headers: {'Content-Type': 'application/x-www-form-urlencoded'}, withCredentials: true})
       .pipe(
         switchMap(() => {
@@ -63,6 +64,6 @@ export class AuthenticationService {
   logout(): Observable<any> {
     sessionStorage.clear();
     this.userAuthSubject.next(null);
-    return this.http.post<any>(`${environment.apiUrl}/logout`, {},{withCredentials: true})
+    return this.http.post<any>(`${environment.apiUrl}/api/logout`, {},{withCredentials: true})
   }
 }

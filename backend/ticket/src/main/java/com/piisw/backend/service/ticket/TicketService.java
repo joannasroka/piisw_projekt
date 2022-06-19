@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,8 +28,8 @@ public class TicketService {
                 .collect(Collectors.toList());
     }
 
-    public TicketResponse getById(Long ticketId) {
-        Ticket ticket = ticketRepository.getById(ticketId);
+    public TicketResponse getByGlobalId(UUID ticketGlobalId) {
+        Ticket ticket = ticketRepository.findByGlobalById(ticketGlobalId);
         return mapToTicketResponse(ticket);
     }
 

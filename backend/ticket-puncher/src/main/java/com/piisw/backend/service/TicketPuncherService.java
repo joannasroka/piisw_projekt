@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 
 @Service
@@ -25,10 +26,11 @@ public class TicketPuncherService {
     private final PassengerRepository passengerRepository;
     private final TicketPurchaseMapper ticketPurchaseMapper;
 
-    public TicketPurchaseResponse punchPurchasedTicket(Long ticketPurchaseId,
+    public TicketPurchaseResponse punchPurchasedTicket(UUID ticketPurchaseGlobalId,
                                                        Long currentPassengerId) {
         Passenger passenger = passengerRepository.getById(currentPassengerId);
-        TicketPurchase ticketPurchase = ticketPurchaseRepository.findByIdAndPassenger(ticketPurchaseId, passenger);
+        TicketPurchase ticketPurchase = ticketPurchaseRepository
+                .findByGlobalIdAndPassenger(ticketPurchaseGlobalId, passenger);
 
         validateTicketPunching(ticketPurchase);
         punchTicket(ticketPurchase);

@@ -21,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -35,7 +36,7 @@ public class TicketPurchaseService {
     public TicketPurchaseResponse purchaseTicket(TicketPurchaseRequest ticketPurchaseRequest,
                                                  Long currentPassengerId) {
         Passenger passenger = passengerRepository.getById(currentPassengerId);
-        Ticket ticket = ticketRepository.getById(ticketPurchaseRequest.getTicketId());
+        Ticket ticket = ticketRepository.findByGlobalById(ticketPurchaseRequest.getGlobalId());
         TicketPrice ticketPrice = ticketPurchaseRequest.getTicketPrice();
 
         TicketPurchase ticketPurchase;
@@ -67,8 +68,8 @@ public class TicketPurchaseService {
     }
 
     @Transactional(readOnly = true)
-    public TicketPurchaseResponse getTicketPurchaseById(Long ticketPurchaseId) {
-        TicketPurchase ticketPurchase = ticketPurchaseRepository.getById(ticketPurchaseId);
+    public TicketPurchaseResponse getTicketPurchaseByGlobalId(UUID ticketPurchaseGlobalId) {
+        TicketPurchase ticketPurchase = ticketPurchaseRepository.findByGlobalById(ticketPurchaseGlobalId);
         return ticketPurchaseMapper.mapToTicketPurchaseResponse(ticketPurchase);
     }
 

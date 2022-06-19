@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.piisw.backend.security.AuthorizationConstants.HAS_ANY_USER_ROLE;
 
@@ -27,8 +28,8 @@ public class TicketController extends BaseController {
     }
 
     @PreAuthorize(HAS_ANY_USER_ROLE)
-    @GetMapping("/{ticketId}")
-    public TicketResponse getTicketById(@PathVariable Long ticketId) {
-        return ticketService.getById(ticketId);
+    @GetMapping("/{ticketGlobalId}")
+    public TicketResponse getTicketById(@PathVariable UUID ticketGlobalId) {
+        return ticketService.getByGlobalId(ticketGlobalId);
     }
 }

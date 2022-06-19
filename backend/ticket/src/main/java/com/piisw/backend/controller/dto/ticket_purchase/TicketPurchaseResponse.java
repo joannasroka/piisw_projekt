@@ -9,13 +9,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 public class TicketPurchaseResponse {
     @Schema(required = true)
-    private Long id;
+    private UUID globalId;
 
     @Schema(required = true)
     private TicketResponse ticket;

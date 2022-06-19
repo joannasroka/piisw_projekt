@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  backend:
+    image: application:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    links:
+      - mariadb
+      - mailhog
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/city_ticket?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: my-secret-pw
+      SPRING_MAIL_HOST: mailhog
+      SPRING_MAIL_PORT: 1025
+      SPRING_MAIL_USERNAME: city-ticket@mail.com
+      SPRING_MAIL_PASSWORD: x
+      CONFIGURATION_SECURITY_ACCOUNTACTIVATIONURL: http://localhost/confirmSignup?token=
+  mariadb:
+    image: mariadb
+    expose:
+      - 3306
+    environment:
+      MARIADB_ROOT_PASSWORD: my-secret-pw
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "8025:8025"
+    expose:
+      - 1025
+  nginx:
+    build:
+      context: ../
+      dockerfile: docker/NginxDockerfile
+    ports:
+      - "80:80"
+    links:
+      - backend
