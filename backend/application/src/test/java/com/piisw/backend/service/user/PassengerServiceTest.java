@@ -15,6 +15,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
@@ -50,7 +52,7 @@ public class PassengerServiceTest {
         String lastName = "Example";
         PassengerRequest passengerRequest = new PassengerRequest(mail, firstName, lastName);
         Passenger passenger = new Passenger(mail, firstName, lastName);
-        PassengerResponse expectedPassengerResponse = new PassengerResponse(1L, mail, firstName, lastName);
+        PassengerResponse expectedPassengerResponse = new PassengerResponse(UUID.randomUUID(), mail, firstName, lastName);
         BindingResult bindingResult = new BeanPropertyBindingResult(passengerRequest, "passengerRequest");
 
         doNothing().when(userEmailValidator).validateEmail(passengerRequest.getEmail(), bindingResult);

@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -51,18 +52,18 @@ public class TicketServiceTest {
         shortTimeTicketResponse.setNormalPrice(price);
         shortTimeTicketResponse.setReducedPrice(price.divide(BigDecimal.valueOf(2.0)));
 
-        Long ticketId = 1L;
+        UUID ticketId = UUID.randomUUID();
 
-        when(ticketRepository.getById(ticketId)).thenReturn(ticket);
+        when(ticketRepository.findByGlobalById(ticketId)).thenReturn(ticket);
         when(ticketMapper.mapToTicketResponse(ticket)).thenReturn(shortTimeTicketResponse);
 
         //when
-        TicketResponse actualTicket = ticketService.getById(ticketId);
+        TicketResponse actualTicket = ticketService.getByGlobalId(ticketId);
 
         //then
         assertNotNull(actualTicket);
         assertEquals(shortTimeTicketResponse, actualTicket);
 
-        verify(ticketRepository, times(1)).getById(1L);
+        verify(ticketRepository, times(1)).findByGlobalById(ticketId);
     }
 }
